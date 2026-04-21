@@ -37,14 +37,8 @@ body {
   color: var(--tvl-red) !important;
 }
 
-.hero_old {
-  background: linear-gradient(135deg, var(--tvl-charcoal) 0%, #2e323a 100%);
-  color: var(--tvl-white);
-  padding: 5rem 0 4rem;
-}
-
 .hero {
-  background:
+  background-image:
     linear-gradient(
       to right,
       rgba(20, 25, 32, 0.92) 0%,
@@ -53,9 +47,8 @@ body {
       rgba(20, 25, 32, 0.15) 100%
     ),
     url("../images/mainhero.jpg");
-
   background-size: cover;
-  background-position: center;
+  background-position: center center;
   background-repeat: no-repeat;
 
   color: white;
