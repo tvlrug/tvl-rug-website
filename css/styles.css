@@ -38,24 +38,13 @@ body {
 }
 
 .hero {
-  background-image:
-    linear-gradient(
-      to right,
-      rgba(20, 25, 32, 0.92) 0%,
-      rgba(20, 25, 32, 0.75) 40%,
-      rgba(20, 25, 32, 0.35) 75%,
-      rgba(20, 25, 32, 0.15) 100%
-    ),
-    url("../images/mainhero.jpg");
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-
-  color: white;
-  padding: 7rem 0;
+  background-image: url("../images/mainhero.jpg") !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
   min-height: 520px;
-  display: flex;
-  align-items: center;
+  padding: 7rem 0;
+  color: white;
 }
 
 .hero h1 {
