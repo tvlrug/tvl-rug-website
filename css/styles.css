@@ -187,12 +187,21 @@ body {
   color: var(--tvl-red);
 }
 
-.badge-tvl {
+.badge-tvl_old {
   background-color: rgba(217, 58, 58, 0.1);
   color: var(--tvl-red);
   font-weight: 600;
   padding: 0.45rem 0.7rem;
   border-radius: 999px;
+}
+
+.badge-tvl {
+  background: rgba(212, 70, 70, 0.1);
+  color: var(--tvl-red);
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
 }
 
 .form-control,
