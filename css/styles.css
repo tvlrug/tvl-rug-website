@@ -37,10 +37,20 @@ body {
   color: var(--tvl-red) !important;
 }
 
-.hero {
+.hero_old {
   background: linear-gradient(135deg, var(--tvl-charcoal) 0%, #2e323a 100%);
   color: var(--tvl-white);
   padding: 5rem 0 4rem;
+}
+.hero {
+  background: linear-gradient(
+      rgba(20, 25, 32, 0.85),
+      rgba(20, 25, 32, 0.85)
+    ),
+    url("../images/hero.jpg") center right / cover no-repeat;
+
+  color: white;
+  padding: 6rem 0;
 }
 
 .hero h1 {
