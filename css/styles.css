@@ -84,6 +84,51 @@ body {
 
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
+.hero-title {
+  font-weight: 700;
+  line-height: 1.05;
+  margin-bottom: 1.25rem;
+  font-size: clamp(3rem, 6vw, 5rem);
+}
+
+.hero-title span {
+  display: block;
+}
+
+.hero-copy {
+  font-size: 1.2rem;
+  max-width: 820px;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.hero-logo-wrap {
+  min-height: 420px;
+}
+
+.hero-logo {
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+  max-width: 220px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 16px;
+  padding: 0.6rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+@media (max-width: 991px) {
+  .hero-logo-wrap {
+    min-height: 220px;
+  }
+
+  .hero-logo {
+    right: 50%;
+    bottom: 10px;
+    transform: translateX(50%);
+    max-width: 180px;
+  }
+}
 
 .section {
   padding: 3.5rem 0;
