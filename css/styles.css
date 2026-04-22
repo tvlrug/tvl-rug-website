@@ -225,13 +225,20 @@ body {
 
 /* Misc */
 .badge-tvl {
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--tvl-white);
-  padding: 0.4rem 0.8rem;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  padding: 0.45rem 0.9rem;
   border-radius: 999px;
+
   font-size: 0.85rem;
   font-weight: 600;
+
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
 }
 
 .form-control,
