@@ -225,9 +225,10 @@ body {
 
 /* Misc */
 .badge-tvl {
-  background: rgba(212, 70, 70, 0.1);
-  color: var(--tvl-red);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--tvl-white);
   padding: 0.4rem 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 999px;
   font-size: 0.85rem;
   font-weight: 600;
