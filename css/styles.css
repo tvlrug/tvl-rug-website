@@ -257,5 +257,25 @@ body {
 
 .logo-small {
   max-height: 42px;
+  .page-content {
+  padding-bottom: 2rem;
+}
+
+.meeting-feature {
+  border-left: 5px solid var(--tvl-red);
+}
+
+.meeting-card,
+.news-card,
+.news-lead {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.meeting-card:hover,
+.news-card:hover,
+.news-lead:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.08);
+}
   margin-right: 0.75rem;
 }
