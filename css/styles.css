@@ -38,6 +38,7 @@ body {
 }
 
 .hero {
+  position: relative;
   background:
     linear-gradient(
       to right,
@@ -47,43 +48,17 @@ body {
       rgba(20, 25, 32, 0.20) 100%
     ),
     url("../images/mainhero.jpg");
-
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
-  color: white;
+  color: var(--tvl-white);
   padding: 7rem 0;
   min-height: 520px;
   display: flex;
   align-items: center;
+  overflow: hidden;
 }
 
-.hero h1 {
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-
-.hero p {
-  font-size: 1.15rem;
-  color: #e5e7eb;
-  max-width: 750px;
-}
-
-.hero-logo {
-  position: absolute;
-  bottom: 30px;   /* space from bottom */
-  right: 30px;    /* space from right */
-
-  max-width: 220px;
-  width: 100%;
-
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 16px;
-  padding: 0.6rem;
-
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-}
 .hero-title {
   font-weight: 700;
   line-height: 1.05;
@@ -101,33 +76,22 @@ body {
   color: rgba(255, 255, 255, 0.92);
 }
 
-.hero-logo-wrap {
-  min-height: 420px;
+.hero p {
+  color: #e5e7eb;
+  max-width: 750px;
 }
 
 .hero-logo {
   position: absolute;
-  right: 30px;
-  bottom: 30px;
-  max-width: 220px;
+  right: 5%;
+  bottom: 5%;
+  max-width: 200px;
   width: 100%;
   background: rgba(255, 255, 255, 0.92);
   border-radius: 16px;
   padding: 0.6rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-}
-
-@media (max-width: 991px) {
-  .hero-logo-wrap {
-    min-height: 220px;
-  }
-
-  .hero-logo {
-    right: 50%;
-    bottom: 10px;
-    transform: translateX(50%);
-    max-width: 180px;
-  }
+  z-index: 2;
 }
 
 .section {
@@ -254,14 +218,6 @@ body {
   color: var(--tvl-red);
 }
 
-.badge-tvl_old {
-  background-color: rgba(217, 58, 58, 0.1);
-  color: var(--tvl-red);
-  font-weight: 600;
-  padding: 0.45rem 0.7rem;
-  border-radius: 999px;
-}
-
 .badge-tvl {
   background: rgba(212, 70, 70, 0.1);
   color: var(--tvl-red);
@@ -299,9 +255,23 @@ body {
 @media (max-width: 991px) {
   .hero {
     text-align: center;
+    padding: 5rem 0 8rem;
+  }
+
+  .hero-title {
+    font-size: clamp(2.4rem, 8vw, 3.6rem);
+  }
+
+  .hero-copy {
+    font-size: 1.05rem;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .hero-logo {
-    margin-top: 2rem;
+    right: 50%;
+    bottom: 20px;
+    transform: translateX(50%);
+    max-width: 160px;
   }
 }
