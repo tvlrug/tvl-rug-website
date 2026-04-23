@@ -428,19 +428,17 @@ body {
 
 /* Homepage status strip */
 .status-strip {
-  margin-top: 0;
-  margin-bottom: 1.5rem;
-  padding-top: 1.5rem;
+  background: var(--tvl-white);
+  padding: 1.5rem 0 0;
   position: relative;
-  z-index: 3;
+  z-index: 1;
 }
- 
+
 .status-strip-inner {
   border-radius: 18px;
   padding: 1rem 1.25rem;
   border: 1px solid var(--tvl-border);
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
-  background: white;
 }
 
 .status-strip-inner.status-good {
