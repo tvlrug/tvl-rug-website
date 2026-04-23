@@ -356,5 +356,40 @@ body {
     display: none;
   }
 }
+.route-preview {
+  position: relative;
+  border-radius: 16px;
+  background: var(--tvl-white);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+}
+
+.route-line-preview {
+  height: 4px;
+  background: var(--tvl-red);
+  margin: 2rem 1rem 1rem;
+  border-radius: 999px;
+}
+
+.route-dots {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem 1rem;
+}
+
+.route-dots span {
+  width: 10px;
+  height: 10px;
+  background: var(--tvl-charcoal);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.route-dots span.highlight {
+  background: var(--tvl-red);
+}
+
+.route-dots span.terminus {
+  background: var(--tvl-red-dark);
+}
   margin-right: 0.75rem;
 }
