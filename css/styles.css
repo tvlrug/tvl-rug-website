@@ -381,29 +381,46 @@ body {
 
 /* Service status route cards */
 .status-route-card {
-  color: white;
   border-radius: 18px;
-  padding: 1.5rem;
+  padding: 1.75rem;
   height: 100%;
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+}
+
+.status-route-card.status-good {
+  background: linear-gradient(135deg, #16a34a, #15803d);
+}
+
+.status-route-card.status-minor {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.status-route-card.status-major {
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
 }
 
 .status-route-card i {
   font-size: 2rem;
   line-height: 1;
+  opacity: 0.95;
 }
 
 .status-route-card h2 {
   font-size: 1.35rem;
   margin: 0.25rem 0 0.75rem;
+  color: #ffffff;
 }
 
 .status-route-card p {
   margin-bottom: 0.75rem;
+  color: rgba(255, 255, 255, 0.95);
 }
 
 .status-route-card small {
-  opacity: 0.85;
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .status-label {
@@ -412,18 +429,7 @@ body {
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-}
-
-.status-good {
-  background: #16a34a;
-}
-
-.status-minor {
-  background: #f59e0b;
-}
-
-.status-major {
-  background: #dc2626;
+  color: rgba(255, 255, 255, 0.95);
 }
 
 /* Homepage status strip */
