@@ -428,11 +428,13 @@ body {
 
 /* Homepage status strip */
 .status-strip {
-  margin-top: -2rem;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  padding-top: 1.5rem;
   position: relative;
   z-index: 3;
 }
-
+ 
 .status-strip-inner {
   border-radius: 18px;
   padding: 1rem 1.25rem;
