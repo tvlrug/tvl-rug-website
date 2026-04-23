@@ -461,18 +461,35 @@ body {
   background: #dc2626;
 }
 .status-strip {
-  background: var(--tvl-white);
   margin-top: -2rem;
   position: relative;
   z-index: 3;
 }
 
 .status-strip-inner {
-  background: var(--tvl-white);
-  border: 1px solid var(--tvl-border);
   border-radius: 18px;
   padding: 1rem 1.25rem;
+  border: 1px solid var(--tvl-border);
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+  background: white;
+}
+
+/* GOOD */
+.status-strip-inner.status-good {
+  background: rgba(22, 163, 74, 0.08);
+  border-color: rgba(22, 163, 74, 0.25);
+}
+
+/* MINOR */
+.status-strip-inner.status-minor {
+  background: rgba(245, 158, 11, 0.08);
+  border-color: rgba(245, 158, 11, 0.35);
+}
+
+/* MAJOR */
+.status-strip-inner.status-major {
+  background: rgba(220, 38, 38, 0.08);
+  border-color: rgba(220, 38, 38, 0.35);
 }
 
 .status-strip-text {
