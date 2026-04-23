@@ -391,5 +391,29 @@ body {
 .route-dots span.terminus {
   background: var(--tvl-red-dark);
 }
+.status-banner {
+  border-radius: 16px;
+  padding: 1.5rem;
+  color: white;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+}
+
+.status-banner i {
+  font-size: 1.8rem;
+}
+
+.status-good {
+  background: #16a34a;
+}
+
+.status-minor {
+  background: #f59e0b;
+}
+
+.status-major {
+  background: #dc2626;
+}
   margin-right: 0.75rem;
 }
