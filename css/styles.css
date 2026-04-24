@@ -576,5 +576,45 @@ body {
     transform: scale(1);
   }
 }
+.status-card-animate {
+  animation: statusCardIn 0.35s ease both;
+}
+
+@keyframes statusCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.status-icon {
+  margin-right: 0.4rem;
+}
+
+.status-pulse {
+  animation: statusPulse 1.8s infinite;
+}
+
+@keyframes statusPulse {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.65;
+    transform: scale(1.08);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
   }
 }
