@@ -1,5 +1,5 @@
 const serviceStatus = {
-  updated: "19:42",
+  updated: "23:30",
   overall: "minor",
 
   routes: [
