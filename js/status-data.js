@@ -1,5 +1,6 @@
 const serviceStatus = {
-  updated: "23:30",
+  updated: "2026-04-25T23:30:00",
+
   overall: "minor",
 
   routes: [
@@ -8,8 +9,8 @@ const serviceStatus = {
       label: "Good service",
       status: "good",
       icon: "bi-check-circle-fill",
-      title: "Northern Service N3 (Saltburn ↔ Darlington, via Redcar, Middlesbrough and Thornaby)",
-      short: "Good service",
+      title: "Northern Service N3 (Saltburn ↔ Darlington)",
+      short: "Tees Valley Line: Good service",
       impact: "Services operating normally across all stations.",
       advice: "No action required.",
       issue: "No reported issues."
@@ -19,8 +20,8 @@ const serviceStatus = {
       label: "Check before travel",
       status: "minor",
       icon: "bi-exclamation-triangle-fill",
-      title: "Northern TPE (Redcar Central ↔ Manchester, via Middlesbrough, York and Leeds)",
-      short: "Check before travel",
+      title: "Northern TPE (Redcar Central ↔ Manchester) (via York and Leeds)",
+      short: "TPE towards Manchester: Check before travel",
       impact: "Services may be subject to delays or alterations.",
       advice: "Check before travelling.",
       issue: "Longer-distance services can be more variable."
