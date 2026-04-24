@@ -14,7 +14,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark">
   <div class="container">
     <a class="navbar-brand d-flex align-items-center" href="index.html">
-      <img src="images/tvlrug-logo.jpg" class="logo-small">
+      <img src="images/tvlrug-logo.jpg" class="logo-small" alt="TVL-RUG logo">
       TVL-RUG
     </a>
 
@@ -41,7 +41,7 @@
   <div class="container">
     <h1>Service Status</h1>
     <p>
-      TVL-RUG monitors two key service groups: local Tees Valley Line services between Saltburn and Darlington, 
+      TVL-RUG monitors two key service groups: local Tees Valley Line services between Saltburn and Darlington,
       and TransPennine Express services between the Tees Valley and Manchester.
     </p>
   </div>
@@ -49,68 +49,26 @@
 
 <main class="page-content">
 
-  <!-- ROUTE STATUS CARDS -->
-<section class="section">
-  <div class="container">
-    <div id="serviceStatusCards" class="row g-4">
-      <!-- Filled from js/status-data.js -->
-    </div>
-  </div>
-</section>
-
-      <!-- TEES VALLEY LINE -->
-      <div class="col-lg-6">
-        <div class="status-route-card status-good">
-          <div class="status-header">
-            <span class="status-label">
-              <i class="bi bi-check-circle-fill status-icon text-success"></i>
-              Good service
-            </span>
-            <span class="status-time">Updated 19:42</span>
-          </div>
-
-          <h2>Service N3 (Saltburn ↔ Darlington)</h2>
-
-          <p class="status-row"><strong>Impact:</strong> Services operating normally across all stations.</p>
-          <p class="status-row"><strong>Advice:</strong> No action required.</p>
-        </div>
+  <section class="section">
+    <div class="container">
+      <div id="serviceStatusCards" class="row g-4">
+        <!-- Filled from js/status-data.js -->
       </div>
-
-      <!-- TPE ROUTE -->
-      <div class="col-lg-6">
-        <div class="status-route-card status-minor">
-          <div class="status-header">
-            <span class="status-label">
-              <i class="bi bi-exclamation-triangle-fill status-icon text-warning"></i>
-              Check before travel
-            </span>
-            <span class="status-time">Updated 19:42</span>
-          </div>
-
-          <h2>Redcar Central ↔ Manchester (via York, Leeds)</h2>
-
-          <p class="status-row"><strong>Impact:</strong> Services may be subject to delays or alterations.</p>
-          <p class="status-row"><strong>Advice:</strong> Check before travelling.</p>
-        </div>
-      </div>
-
     </div>
-  </div>
-</section>
-  <!-- CURRENT SUMMARY -->
+  </section>
+
   <section class="section section-light">
     <div class="container">
       <div class="card p-4">
         <h2 class="h5 mb-2">Current overview</h2>
         <p class="mb-0">
-          No major disruption is currently affecting services across the Tees Valley Line. 
+          No major disruption is currently affecting services across the Tees Valley Line.
           Passengers travelling beyond the local route are encouraged to check operator updates, particularly for longer-distance services.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- LATEST UPDATES -->
   <section class="section">
     <div class="container">
       <h2 class="section-title">Latest updates</h2>
@@ -119,7 +77,6 @@
       </p>
 
       <div class="row g-4">
-
         <div class="col-md-6">
           <div class="card p-4 h-100">
             <span class="badge-tvl mb-3">Tees Valley Line</span>
@@ -141,12 +98,10 @@
             </p>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- USEFUL LINKS -->
   <section class="section section-light">
     <div class="container">
       <h2 class="section-title">Useful links</h2>
@@ -183,7 +138,7 @@
 
       <div class="mt-4">
         <p class="text-secondary mb-0">
-          TVL-RUG service status information is provided for general awareness only. 
+          TVL-RUG service status information is provided for general awareness only.
           Passengers should always check official operator and National Rail sources before travelling.
         </p>
       </div>
@@ -199,6 +154,8 @@
       <div class="col-lg-4 text-lg-center">
         <a href="about.html">About</a> ·
         <a href="meetings.html">Meetings</a> ·
+        <a href="route.html">The Route</a> ·
+        <a href="service-status.html">Service Status</a> ·
         <a href="news.html">News</a> ·
         <a href="contact.html">Contact</a>
       </div>
@@ -208,12 +165,10 @@
     </div>
   </div>
 </footer>
+
 <script src="js/status-data.js"></script>
 <script src="js/status-render.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
