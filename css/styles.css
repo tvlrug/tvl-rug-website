@@ -552,4 +552,29 @@ body {
     margin-left: 1.6rem;
     margin-top: 0.25rem;
   }
+  .status-icon {
+  margin-right: 0.4rem;
+}
+
+.status-pulse {
+  animation: statusPulse 1.8s infinite;
+}
+
+@keyframes statusPulse {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.65;
+    transform: scale(1.08);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+  }
 }
