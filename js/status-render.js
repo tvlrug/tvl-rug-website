@@ -32,7 +32,6 @@ function renderServiceStatusCards() {
             ${route.label}
           </span>
           <span class="status-time" data-updated="${serviceStatus.updated}">
-            Updated just now
           </span>
         </div>
 
