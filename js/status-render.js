@@ -7,9 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
     renderServiceStatusCards();
   }
 
-  updateRelativeTimes();
-
-  setInterval(updateRelativeTimes, 60000);
 });
 
 function renderHomepageStatus() {
@@ -31,8 +28,10 @@ function renderServiceStatusCards() {
             <i class="bi ${route.icon} status-icon ${route.status !== "good" ? "status-pulse" : ""}"></i>
             ${route.label}
           </span>
-          <span class="status-time" data-updated="${serviceStatus.updated}">
+          <span class="status-time">
+          Updated: ${serviceStatus.updated}
           </span>
+
         </div>
 
         <h2>${route.title}</h2>
@@ -45,36 +44,4 @@ function renderServiceStatusCards() {
   `).join("");
 }
 
-function updateRelativeTimes() {
-  const updatedElements = document.querySelectorAll("[data-updated]");
 
-  updatedElements.forEach(element => {
-    const updatedDate = new Date(element.dataset.updated);
-    const now = new Date();
-
-    if (Number.isNaN(updatedDate.getTime())) {
-      element.textContent = "Updated recently";
-      return;
-    }
-
-    const diffMs = now - updatedDate;
-    const diffMinutes = Math.floor(diffMs / 60000);
-    const diffHours = Math.floor(diffMinutes / 60);
-
-    // 🟢 Better logic
-    if (diffMinutes < 1) {
-      element.textContent = "Updated just now";
-    } 
-    else if (diffMinutes < 60) {
-      element.textContent = `Updated ${diffMinutes} minute${diffMinutes === 1 ? "" : "s"} ago`;
-    } 
-    else if (diffHours < 6) {
-      element.textContent = `Updated ${diffHours} hour${diffHours === 1 ? "" : "s"} ago`;
-    } 
-    else {
-      // 👇 fallback to actual time (much nicer UX)
-      const time = updatedDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-      element.textContent = `Updated today at ${time}`;
-    }
-  });
-}
