@@ -1,7 +1,12 @@
 const serviceStatus = {
-  updated: "2026-04-25T23:30:00",
+  updated: "25 Apr 2026, 23:30",
 
   overall: "minor",
+
+  routes: [
+    // routes here
+  ]
+};
 
   routes: [
     {
