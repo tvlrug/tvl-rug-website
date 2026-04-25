@@ -60,16 +60,21 @@ function updateRelativeTimes() {
     const diffMs = now - updatedDate;
     const diffMinutes = Math.floor(diffMs / 60000);
     const diffHours = Math.floor(diffMinutes / 60);
-    const diffDays = Math.floor(diffHours / 24);
 
+    // 🟢 Better logic
     if (diffMinutes < 1) {
       element.textContent = "Updated just now";
-    } else if (diffMinutes < 60) {
+    } 
+    else if (diffMinutes < 60) {
       element.textContent = `Updated ${diffMinutes} minute${diffMinutes === 1 ? "" : "s"} ago`;
-    } else if (diffHours < 24) {
+    } 
+    else if (diffHours < 6) {
       element.textContent = `Updated ${diffHours} hour${diffHours === 1 ? "" : "s"} ago`;
-    } else {
-      element.textContent = `Updated ${diffDays} day${diffDays === 1 ? "" : "s"} ago`;
+    } 
+    else {
+      // 👇 fallback to actual time (much nicer UX)
+      const time = updatedDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      element.textContent = `Updated today at ${time}`;
     }
   });
 }
