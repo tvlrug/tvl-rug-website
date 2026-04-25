@@ -618,3 +618,21 @@ body {
 }
   }
 }
+.locked-card {
+  opacity: 0.9;
+  position: relative;
+}
+
+.locked-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.28);
+  pointer-events: none;
+}
+
+.locked-card .btn:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+}
