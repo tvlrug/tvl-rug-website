@@ -69,12 +69,23 @@
     <div id="homepageStatus" class="status-strip-inner status-minor">
       <div class="d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-3">
         <div>
-          <span class="status-dot status-dot-minor"></span>
-          <strong>Current service status</strong>
+          <span id="homepageStatusDot" class="status-dot status-dot-minor"></span>
+          <strong id="homepageStatusLabel">Current service status</strong>
           <span id="homepageStatusText" class="status-strip-text">
             Loading service status...
           </span>
+          <span id="homepageStatusUpdated" class="status-strip-updated">
+            Updated: loading
+          </span>
         </div>
+
+        <a href="service-status.html" class="btn btn-outline-tvl btn-sm">
+          View full status
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
         <a href="service-status.html" class="btn btn-outline-tvl btn-sm">
           View full status
