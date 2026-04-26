@@ -645,3 +645,14 @@ body {
   opacity: 0.75;
   cursor: not-allowed;
 }
+.article-card {
+  max-width: 820px;
+}
+
+.article-image {
+  width: 100%;
+  max-height: 360px;
+  object-fit: cover;
+  border-radius: 16px;
+  border: 1px solid var(--tvl-border);
+}
