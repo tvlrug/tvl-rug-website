@@ -656,3 +656,72 @@ body {
   border-radius: 16px;
   border: 1px solid var(--tvl-border);
 }
+.status-strip-updated {
+  display: inline-block;
+  color: var(--tvl-grey);
+  font-size: 0.85rem;
+  margin-left: 0.75rem;
+}
+
+.status-card-animate {
+  animation: statusCardIn 0.35s ease both;
+}
+
+@keyframes statusCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.status-pulse {
+  animation: statusPulse 1.8s infinite;
+}
+
+@keyframes statusPulse {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.6;
+    transform: scale(1.08);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.status-strip-inner.status-major {
+  animation: statusMajorGlow 2.2s infinite;
+}
+
+@keyframes statusMajorGlow {
+  0% {
+    box-shadow: 0 10px 28px rgba(220, 38, 38, 0.12);
+  }
+
+  50% {
+    box-shadow: 0 10px 34px rgba(220, 38, 38, 0.28);
+  }
+
+  100% {
+    box-shadow: 0 10px 28px rgba(220, 38, 38, 0.12);
+  }
+}
+
+@media (max-width: 991px) {
+  .status-strip-updated {
+    display: block;
+    margin-left: 1.6rem;
+    margin-top: 0.25rem;
+  }
+}
