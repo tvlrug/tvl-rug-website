@@ -4,11 +4,6 @@ const serviceStatus = {
   overall: "minor",
 
   routes: [
-    // routes here
-  ]
-};
-
-  routes: [
     {
       id: "tvl",
       label: "Good service",
