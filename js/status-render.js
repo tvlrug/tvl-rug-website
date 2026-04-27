@@ -88,3 +88,32 @@ function renderServiceStatusOverview() {
       "Services are currently reported as operating normally across the monitored routes.";
   }
 }
+function renderEngineeringWorks() {
+  const container = document.querySelector("#engineeringWorksContainer");
+
+  if (!container) return;
+
+  if (!serviceStatus.engineeringWorks || serviceStatus.engineeringWorks.length === 0) {
+    container.innerHTML = `
+      <div class="col-12">
+        <div class="card p-4">
+          <p class="mb-0">No planned engineering works currently listed.</p>
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = serviceStatus.engineeringWorks.map(work => `
+    <div class="col-md-6">
+      <div class="card p-4 h-100 engineering-card">
+        <span class="badge-news mb-2">${work.date}</span>
+        <h3 class="h5">${work.route}</h3>
+        <p class="news-meta mb-2">${work.title}</p>
+
+        <p class="mb-1"><strong>Impact:</strong> ${work.impact}</p>
+        <p class="mb-0"><strong>Advice:</strong> ${work.advice}</p>
+      </div>
+    </div>
+  `).join("");
+}
