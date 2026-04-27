@@ -761,4 +761,60 @@ body {
 .status-route-card.status-major .status-icon {
   color: #dc2626 !important;
 }
+  .incident-status {
+  gap: 0.45rem;
+  align-items: center;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.incident-status-active {
+  background: rgba(220, 38, 38, 0.1);
+  color: #dc2626;
+  border: 1px solid rgba(220, 38, 38, 0.25);
+}
+
+.incident-status-monitoring {
+  background: rgba(245, 158, 11, 0.12);
+  color: #b45309;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.incident-status-resolved {
+  background: rgba(22, 163, 74, 0.1);
+  color: #15803d;
+  border: 1px solid rgba(22, 163, 74, 0.25);
+}
+
+.incident-timeline {
+  border-left: 3px solid var(--tvl-red);
+  padding-left: 1.25rem;
+}
+
+.incident-timeline-item {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.incident-timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -1.7rem;
+  top: 0.35rem;
+  width: 12px;
+  height: 12px;
+  background: var(--tvl-red);
+  border-radius: 50%;
+  border: 3px solid var(--tvl-white);
+  box-shadow: 0 0 0 2px rgba(217, 58, 58, 0.2);
+}
+
+.incident-time {
+  display: inline-block;
+  font-weight: 700;
+  color: var(--tvl-red);
+  margin-bottom: 0.25rem;
+}
 }
