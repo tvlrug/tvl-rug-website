@@ -817,4 +817,17 @@ body {
   color: var(--tvl-red);
   margin-bottom: 0.25rem;
 }
+  .incident-resolved-banner {
+  background: rgba(22, 163, 74, 0.1);
+  border: 1px solid rgba(22, 163, 74, 0.25);
+  color: #15803d;
+  border-radius: 16px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.incident-archive-card {
+  border-left: 5px solid var(--tvl-red);
+}
 }
