@@ -1,9 +1,12 @@
-if (document.querySelector("#engineeringWorksContainer")) {
-  renderEngineeringWorks();
-}
 document.addEventListener("DOMContentLoaded", () => {
+  applyEngineeringEscalation();
+
   if (document.querySelector("#homepageStatus")) {
     renderHomepageStatus();
+  }
+
+  if (document.querySelector("#homepageEngineeringBanner")) {
+    renderHomepageEngineeringBanner();
   }
 
   if (document.querySelector("#serviceStatusCards")) {
@@ -13,12 +16,60 @@ document.addEventListener("DOMContentLoaded", () => {
   if (document.querySelector("#serviceStatusOverview")) {
     renderServiceStatusOverview();
   }
+
+  if (document.querySelector("#engineeringWorksContainer")) {
+    renderEngineeringWorks();
+  }
 });
+
+function todayOnly(date = new Date()) {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+}
+
+function parseDate(dateString) {
+  const [year, month, day] = dateString.split("-").map(Number);
+  return new Date(year, month - 1, day);
+}
+
+function daysUntil(startDate) {
+  const today = todayOnly();
+  const start = todayOnly(parseDate(startDate));
+  return Math.ceil((start - today) / 86400000);
+}
+
+function isEngineeringActive(work) {
+  const today = todayOnly();
+  const start = todayOnly(parseDate(work.startDate));
+  const end = todayOnly(parseDate(work.endDate));
+
+  return today >= start && today <= end;
+}
+
+function isEngineeringSoon(work) {
+  const days = daysUntil(work.startDate);
+  return days >= 0 && days <= 5;
+}
+
+function getVisibleEngineeringWorks() {
+  if (!serviceStatus.engineeringWorks) return [];
+
+  return serviceStatus.engineeringWorks.filter(work =>
+    isEngineeringActive(work) || isEngineeringSoon(work)
+  );
+}
+
+function applyEngineeringEscalation() {
+  const activeWorks = serviceStatus.engineeringWorks?.some(isEngineeringActive);
+
+  if (activeWorks) {
+    serviceStatus.overall = "major";
+  }
+}
 
 function getOverallLabel(status) {
   if (status === "good") return "Good service";
-  if (status === "minor") return "Check before travel";
-  if (status === "major") return "Major disruption";
+  if (status === "minor") return "Disruption possible";
+  if (status === "major") return "Engineering works active";
   return "Service update";
 }
 
@@ -31,21 +82,41 @@ function renderHomepageStatus() {
 
   strip.className = `status-strip-inner status-${serviceStatus.overall}`;
 
-  if (dot) {
-    dot.className = `status-dot status-dot-${serviceStatus.overall}`;
+  if (dot) dot.className = `status-dot status-dot-${serviceStatus.overall}`;
+  if (label) label.textContent = getOverallLabel(serviceStatus.overall);
+  if (text) text.textContent = serviceStatus.routes.map(route => route.short).join(" · ");
+  if (updated) updated.textContent = `Updated: ${serviceStatus.updated}`;
+}
+
+function renderHomepageEngineeringBanner() {
+  const banner = document.querySelector("#homepageEngineeringBanner");
+  const visibleWorks = getVisibleEngineeringWorks();
+
+  if (!banner) return;
+
+  if (visibleWorks.length === 0) {
+    banner.closest(".engineering-strip").style.display = "none";
+    return;
   }
 
-  if (label) {
-    label.textContent = getOverallLabel(serviceStatus.overall);
-  }
+  const nextWork = visibleWorks[0];
+  const active = isEngineeringActive(nextWork);
 
-  if (text) {
-    text.textContent = serviceStatus.routes.map(route => route.short).join(" · ");
-  }
+  banner.innerHTML = `
+    <div class="d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-3">
+      <div>
+        <i class="bi bi-tools me-2"></i>
+        <strong>${active ? "Engineering works active" : "Upcoming engineering works"}</strong>
+        <span class="engineering-strip-text">
+          ${nextWork.date}: ${nextWork.route} — ${nextWork.title}
+        </span>
+      </div>
 
-  if (updated) {
-    updated.textContent = `Updated: ${serviceStatus.updated}`;
-  }
+      <a href="service-status.html" class="btn btn-outline-tvl btn-sm">
+        View details
+      </a>
+    </div>
+  `;
 }
 
 function renderServiceStatusCards() {
@@ -76,11 +147,14 @@ function renderServiceStatusCards() {
 
 function renderServiceStatusOverview() {
   const overview = document.querySelector("#serviceStatusOverview");
-
-  const major = serviceStatus.routes.some(route => route.status === "major");
+  const activeWorks = serviceStatus.engineeringWorks?.some(isEngineeringActive);
   const minor = serviceStatus.routes.some(route => route.status === "minor");
+  const major = serviceStatus.routes.some(route => route.status === "major");
 
-  if (major) {
+  if (activeWorks) {
+    overview.textContent =
+      "Engineering works are currently active on part of the wider route. Rail replacement buses may be in operation. Passengers should check before travelling and allow extra time.";
+  } else if (major) {
     overview.textContent =
       "Major disruption is currently affecting one or more monitored service groups. Passengers should check official operator and National Rail information before travelling.";
   } else if (minor) {
@@ -91,6 +165,7 @@ function renderServiceStatusOverview() {
       "Services are currently reported as operating normally across the monitored routes.";
   }
 }
+
 function renderEngineeringWorks() {
   const container = document.querySelector("#engineeringWorksContainer");
 
@@ -113,7 +188,6 @@ function renderEngineeringWorks() {
         <span class="badge-news mb-2">${work.date}</span>
         <h3 class="h5">${work.route}</h3>
         <p class="news-meta mb-2">${work.title}</p>
-
         <p class="mb-1"><strong>Impact:</strong> ${work.impact}</p>
         <p class="mb-0"><strong>Advice:</strong> ${work.advice}</p>
       </div>
