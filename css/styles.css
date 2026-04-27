@@ -724,4 +724,13 @@ body {
     margin-left: 1.6rem;
     margin-top: 0.25rem;
   }
+  .engineering-card {
+  border-left: 4px solid var(--tvl-red);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.engineering-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.08);
+}
 }
