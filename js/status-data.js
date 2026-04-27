@@ -14,6 +14,26 @@ const serviceStatus = {
       impact: "Services operating normally across all stations.",
       advice: "No action required.",
       issue: "No reported issues."
+      // =============================================
+// 🔴 EXAMPLE INCIDENT (UNCOMMENT WHEN NEEDED)
+// =============================================
+
+// {
+//   id: "tpe",
+//   label: "Major disruption",
+//   status: "major",
+//   icon: "bi-exclamation-octagon-fill",
+//   title: "Northern TPE (Redcar Central ↔ Manchester) (via York and Leeds)",
+//   short: "TPE towards Manchester: Major disruption — check before travelling",
+
+//   issue: "Signalling failure between York and Northallerton",
+
+//   impact: "Services are subject to significant delays and cancellations. Some services are starting and terminating early or not running.",
+
+//   advice: "Passengers should check before travelling. Consider alternative routes where possible and allow extra time for your journey.",
+
+//   incidentUrl: "incident-2026-05-02-york-darlington.html"
+// },
     },
     {
       id: "tpe",
@@ -25,6 +45,26 @@ const serviceStatus = {
       impact: "Services may be subject to delays or alterations.",
       advice: "Check before travelling.",
       issue: "Longer-distance services can be more variable."
+      // =============================================
+// 🔴 EXAMPLE INCIDENT (UNCOMMENT WHEN NEEDED)
+// =============================================
+
+// {
+//   id: "tpe",
+//   label: "Major disruption",
+//   status: "major",
+//   icon: "bi-exclamation-octagon-fill",
+//   title: "Northern TPE (Redcar Central ↔ Manchester) (via York and Leeds)",
+//   short: "TPE towards Manchester: Major disruption — check before travelling",
+
+//   issue: "Signalling failure between York and Northallerton",
+
+//   impact: "Services are subject to significant delays and cancellations. Some services are starting and terminating early or not running.",
+
+//   advice: "Passengers should check before travelling. Consider alternative routes where possible and allow extra time for your journey.",
+
+//   incidentUrl: "incident-2026-05-02-york-darlington.html"
+// },
     }
   ],
 
