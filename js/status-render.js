@@ -1,3 +1,6 @@
+if (document.querySelector("#engineeringWorksContainer")) {
+  renderEngineeringWorks();
+}
 document.addEventListener("DOMContentLoaded", () => {
   if (document.querySelector("#homepageStatus")) {
     renderHomepageStatus();
