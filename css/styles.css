@@ -232,13 +232,16 @@ body {
 
 .badge-news {
   display: inline-block;
-  background: rgba(217, 58, 58, 0.1);
+  width: 100%;
+  background: rgba(217, 58, 58, 0.08);
   color: var(--tvl-red);
-  border: 1px solid rgba(217, 58, 58, 0.2);
-  padding: 0.45rem 0.9rem;
+  border: 1px solid rgba(217, 58, 58, 0.28);
+  padding: 0.9rem 1.25rem;
   border-radius: 999px;
-  font-size: 0.85rem;
+  font-size: 1rem;
   font-weight: 700;
+  line-height: 1;
+  box-shadow: none;
 }
 
 /* Forms */
