@@ -26,21 +26,15 @@ const serviceStatus = {
       advice: "Check before travelling.",
       issue: "Longer-distance services can be more variable."
     }
-    engineeringWorks: [
-  {
-    date: "11 May 2026",
-    route: "Saltburn ↔ Darlington",
-    title: "Engineering work affecting local services",
-    impact: "Replacement buses may operate between Middlesbrough and Saltburn.",
-    advice: "Allow extra time and check before travelling."
-  },
-  {
-    date: "18 May 2026",
-    route: "Redcar ↔ Manchester",
-    title: "Infrastructure upgrades on TransPennine route",
-    impact: "Some services may be diverted or start/terminate early.",
-    advice: "Check operator updates before travelling."
-  }
-]
+  ],
+
+  engineeringWorks: [
+    {
+      date: "2–4 and 23–25 May 2026",
+      route: "York ↔ Darlington / Redcar Central",
+      title: "Rail replacement buses due to engineering improvement works",
+      impact: "Buses will replace trains between York and Darlington/Redcar Central. TPE and LNER services to and from Newcastle will start and terminate at Northallerton. Northern will continue to operate train services between Darlington and Saltburn.",
+      advice: "Customers for Thirsk and stations to Redcar Central should change at Northallerton for buses to Thirsk. Customers for other destinations should change at Darlington for buses to York. Check before travelling and allow extra time."
+    }
   ]
 };
