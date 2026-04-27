@@ -2,7 +2,10 @@ const serviceStatus = {
   updated: "25 Apr 2026, 23:30",
 
   overall: "minor",
-
+// STATUS LEVELS:
+// good   = normal service
+// minor  = disruption possible
+// major  = major disruption (red / critical)
   routes: [
     {
       id: "tvl",
