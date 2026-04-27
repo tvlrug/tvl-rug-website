@@ -733,4 +733,32 @@ body {
   transform: translateY(-3px);
   box-shadow: 0 12px 26px rgba(0, 0, 0, 0.08);
 }
+  /* Fix status card label blobs */
+.status-route-card .status-label {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  color: var(--tvl-grey) !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.status-route-card .status-icon {
+  margin-right: 0.25rem;
+}
+
+.status-route-card.status-good .status-icon {
+  color: #16a34a !important;
+}
+
+.status-route-card.status-minor .status-icon {
+  color: #f59e0b !important;
+}
+
+.status-route-card.status-major .status-icon {
+  color: #dc2626 !important;
+}
 }
