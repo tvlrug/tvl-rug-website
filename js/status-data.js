@@ -26,5 +26,21 @@ const serviceStatus = {
       advice: "Check before travelling.",
       issue: "Longer-distance services can be more variable."
     }
+    engineeringWorks: [
+  {
+    date: "11 May 2026",
+    route: "Saltburn ↔ Darlington",
+    title: "Engineering work affecting local services",
+    impact: "Replacement buses may operate between Middlesbrough and Saltburn.",
+    advice: "Allow extra time and check before travelling."
+  },
+  {
+    date: "18 May 2026",
+    route: "Redcar ↔ Manchester",
+    title: "Infrastructure upgrades on TransPennine route",
+    impact: "Some services may be diverted or start/terminate early.",
+    advice: "Check operator updates before travelling."
+  }
+]
   ]
 };
