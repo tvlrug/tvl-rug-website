@@ -350,6 +350,14 @@ body {
   border-radius: 50%;
   display: inline-block;
 }
+.route-dot {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.route-station:hover .route-dot {
+  transform: scale(1.15);
+  box-shadow: 0 0 0 4px rgba(217, 58, 58, 0.15);
+}
 
 .route-dots span.highlight { background: var(--tvl-red); }
 .route-dots span.terminus { background: var(--tvl-red-dark); }
