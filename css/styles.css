@@ -742,23 +742,37 @@ body {
     align-items: flex-start;
   }
   /* Homepage route preview fix */
+/* Homepage route preview - line and dots locked together */
 .route-preview {
-  padding: 2rem 2rem 1.5rem !important;
+  position: relative;
+  min-height: 140px;
+  padding: 2rem !important;
 }
 
 .route-line-preview {
+  position: absolute;
+  left: 2rem;
+  right: 2rem;
+  top: 50%;
   height: 4px;
+  margin: 0 !important;
   background: var(--tvl-red);
   border-radius: 999px;
-  margin: 1.5rem 0 0 !important;
+  transform: translateY(-50%);
+  z-index: 1;
 }
 
 .route-dots {
+  position: absolute;
+  left: 2rem;
+  right: 2rem;
+  top: 50%;
   display: flex;
   justify-content: space-between;
-  position: relative;
-  top: -10px;
   padding: 0 !important;
+  margin: 0 !important;
+  transform: translateY(-50%);
+  z-index: 2;
 }
 
 .route-dots span {
@@ -776,5 +790,4 @@ body {
 
 .route-dots span.terminus {
   background: var(--tvl-red-dark);
-}
 }
