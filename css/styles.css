@@ -741,4 +741,40 @@ body {
   .status-header {
     align-items: flex-start;
   }
+  /* Homepage route preview fix */
+.route-preview {
+  padding: 2rem 2rem 1.5rem !important;
+}
+
+.route-line-preview {
+  height: 4px;
+  background: var(--tvl-red);
+  border-radius: 999px;
+  margin: 1.5rem 0 0 !important;
+}
+
+.route-dots {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  top: -10px;
+  padding: 0 !important;
+}
+
+.route-dots span {
+  width: 14px;
+  height: 14px;
+  background: var(--tvl-charcoal);
+  border-radius: 50%;
+  display: inline-block;
+  border: 3px solid var(--tvl-white);
+}
+
+.route-dots span.highlight {
+  background: var(--tvl-red);
+}
+
+.route-dots span.terminus {
+  background: var(--tvl-red-dark);
+}
 }
