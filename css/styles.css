@@ -122,7 +122,8 @@ body {
 
 .meeting-card,
 .news-card,
-.news-lead {
+.news-lead,
+.engineering-card {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -265,8 +266,7 @@ body {
   padding: 1.5rem;
 }
 
-/* Route diagram */
-/* Route diagram */
+/* Full route diagram */
 .route-diagram {
   position: relative;
   display: grid;
@@ -311,13 +311,8 @@ body {
   box-shadow: 0 0 0 4px rgba(217, 58, 58, 0.15);
 }
 
-.route-dot.interchange {
-  background: var(--tvl-red);
-}
-
-.route-dot.terminus {
-  background: var(--tvl-red-dark);
-}
+.route-dot.interchange { background: var(--tvl-red); }
+.route-dot.terminus { background: var(--tvl-red-dark); }
 
 .route-label {
   margin-top: 0.85rem;
@@ -326,29 +321,41 @@ body {
   color: var(--tvl-charcoal);
   white-space: normal;
 }
-/* Route homepage preview */
+
+/* Homepage route preview */
 .route-preview {
   position: relative;
+  min-height: 140px;
   border-radius: 16px;
   background: var(--tvl-white);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
-  padding: 2rem 2rem 1.5rem;
+  padding: 2rem !important;
 }
 
-/* Center the dots onto the line */
 .route-line-preview {
+  position: absolute;
+  left: 2rem;
+  right: 2rem;
+  top: 50%;
   height: 4px;
+  margin: 0 !important;
   background: var(--tvl-red);
   border-radius: 999px;
-  margin: 1.5rem 0 0;
-  position: relative;
+  transform: translateY(-50%);
+  z-index: 1;
 }
 
 .route-dots {
+  position: absolute;
+  left: 2rem;
+  right: 2rem;
+  top: 50%;
   display: flex;
   justify-content: space-between;
-  position: relative;
-  top: -10px; /* pulls dots onto the line */
+  padding: 0 !important;
+  margin: 0 !important;
+  transform: translateY(-50%);
+  z-index: 2;
 }
 
 .route-dots span {
@@ -358,42 +365,6 @@ body {
   border-radius: 50%;
   display: inline-block;
   border: 3px solid var(--tvl-white);
-}
-
-.route-dots span.highlight {
-  background: var(--tvl-red);
-}
-
-.route-dots span.terminus {
-  background: var(--tvl-red-dark);
-}
-.route-line-preview {
-  height: 4px;
-  background: var(--tvl-red);
-  margin: 2rem 1rem 1rem;
-  border-radius: 999px;
-}
-
-.route-dots {
-  display: flex;
-  justify-content: space-between;
-  padding: 0 1rem 1rem;
-}
-
-.route-dots span {
-  width: 10px;
-  height: 10px;
-  background: var(--tvl-charcoal);
-  border-radius: 50%;
-  display: inline-block;
-}
-.route-dot {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.route-station:hover .route-dot {
-  transform: scale(1.15);
-  box-shadow: 0 0 0 4px rgba(217, 58, 58, 0.15);
 }
 
 .route-dots span.highlight { background: var(--tvl-red); }
@@ -568,9 +539,7 @@ body {
   box-shadow: 0 8px 22px rgba(0, 0, 0, 0.04);
 }
 
-.engineering-strip-inner i {
-  color: var(--tvl-red);
-}
+.engineering-strip-inner i { color: var(--tvl-red); }
 
 .engineering-strip-text {
   color: var(--tvl-grey);
@@ -579,7 +548,6 @@ body {
 
 .engineering-card {
   border-left: 4px solid var(--tvl-red);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 /* Members */
@@ -698,9 +666,7 @@ body {
   text-decoration: none;
 }
 
-.footer a:hover {
-  color: var(--tvl-red);
-}
+.footer a:hover { color: var(--tvl-red); }
 
 /* Responsive */
 @media (max-width: 991px) {
@@ -721,9 +687,7 @@ body {
     gap: 1rem 0.75rem;
   }
 
-  .route-line {
-    display: none;
-  }
+  .route-line { display: none; }
 
   .status-strip-text,
   .status-strip-updated {
@@ -741,53 +705,4 @@ body {
   .status-header {
     align-items: flex-start;
   }
-  /* Homepage route preview fix */
-/* Homepage route preview - line and dots locked together */
-.route-preview {
-  position: relative;
-  min-height: 140px;
-  padding: 2rem !important;
-}
-
-.route-line-preview {
-  position: absolute;
-  left: 2rem;
-  right: 2rem;
-  top: 50%;
-  height: 4px;
-  margin: 0 !important;
-  background: var(--tvl-red);
-  border-radius: 999px;
-  transform: translateY(-50%);
-  z-index: 1;
-}
-
-.route-dots {
-  position: absolute;
-  left: 2rem;
-  right: 2rem;
-  top: 50%;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 !important;
-  margin: 0 !important;
-  transform: translateY(-50%);
-  z-index: 2;
-}
-
-.route-dots span {
-  width: 14px;
-  height: 14px;
-  background: var(--tvl-charcoal);
-  border-radius: 50%;
-  display: inline-block;
-  border: 3px solid var(--tvl-white);
-}
-
-.route-dots span.highlight {
-  background: var(--tvl-red);
-}
-
-.route-dots span.terminus {
-  background: var(--tvl-red-dark);
 }
