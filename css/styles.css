@@ -332,8 +332,41 @@ body {
   border-radius: 16px;
   background: var(--tvl-white);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+  padding: 2rem 2rem 1.5rem;
 }
 
+/* Center the dots onto the line */
+.route-line-preview {
+  height: 4px;
+  background: var(--tvl-red);
+  border-radius: 999px;
+  margin: 1.5rem 0 0;
+  position: relative;
+}
+
+.route-dots {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  top: -10px; /* pulls dots onto the line */
+}
+
+.route-dots span {
+  width: 14px;
+  height: 14px;
+  background: var(--tvl-charcoal);
+  border-radius: 50%;
+  display: inline-block;
+  border: 3px solid var(--tvl-white);
+}
+
+.route-dots span.highlight {
+  background: var(--tvl-red);
+}
+
+.route-dots span.terminus {
+  background: var(--tvl-red-dark);
+}
 .route-line-preview {
   height: 4px;
   background: var(--tvl-red);
