@@ -27,6 +27,6 @@ export default async function handler(req, res) {
     `,
   });
 
-  res.writeHead(302, { Location: "/success.html" });
+  return res.redirect(303, "/contact-success.html");
   res.end();
 }
