@@ -1,1 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rail Command Centre | TVL-RUG</title>
 
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">TVL-RUG</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="meetings.html">Meetings</a></li>
+        <li class="nav-item"><a class="nav-link active" href="rail-command-centre.html">Command Centre</a></li>
+        <li class="nav-item"><a class="nav-link" href="news.html">News</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="command-hero">
+  <div class="container">
+    <span class="command-kicker">TVL-RUG Rail Command Centre</span>
+    <h1>Passenger intelligence for the Tees Valley Line</h1>
+    <p>
+      A dashboard-style view of key routes, disruption themes, engineering work and passenger feedback priorities.
+    </p>
+  </div>
+</header>
+
+<main class="command-dashboard py-5">
+  <div class="container">
+
+    <div class="dashboard-topline">
+      <div>
+        <span class="dashboard-label">Current snapshot</span>
+        <h2>Route overview</h2>
+      </div>
+      <div class="last-updated">
+        Last updated: manual snapshot
+      </div>
+    </div>
+
+    <div class="row g-4 mb-4">
+      <div class="col-lg-3 col-md-6">
+        <div class="metric-card">
+          <span class="metric-label">Northern</span>
+          <h3>Check before travel</h3>
+          <p>Saltburn – Darlington</p>
+          <span class="status-pill amber">Monitoring</span>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="metric-card">
+          <span class="metric-label">TPE</span>
+          <h3>Check before travel</h3>
+          <p>Redcar / Middlesbrough – Manchester</p>
+          <span class="status-pill amber">Monitoring</span>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="metric-card">
+          <span class="metric-label">Connections</span>
+          <h3>Darlington watch</h3>
+          <p>East Coast / Bishop Auckland interchange</p>
+          <span class="status-pill red">Passenger concern</span>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="metric-card">
+          <span class="metric-label">Engineering</span>
+          <h3>Planned works</h3>
+          <p>Check before travelling</p>
+          <span class="status-pill grey">Advisory</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-lg-8">
+        <section class="dashboard-panel">
+          <div class="panel-header">
+            <div>
+              <span class="dashboard-label">Live-style board</span>
+              <h3>Key route flows</h3>
+            </div>
+          </div>
+
+          <div class="route-board">
+            <div class="route-row">
+              <div>
+                <strong>Northern</strong>
+                <span>Saltburn · Redcar · Middlesbrough · Darlington</span>
+              </div>
+              <span class="status-pill amber">Monitor</span>
+            </div>
+
+            <div class="route-row">
+              <div>
+                <strong>TransPennine Express</strong>
+                <span>Redcar · Middlesbrough · York · Manchester</span>
+              </div>
+              <span class="status-pill amber">Monitor</span>
+            </div>
+
+            <div class="route-row">
+              <div>
+                <strong>LNER connections</strong>
+                <span>Darlington / York long-distance interchange</span>
+              </div>
+              <span class="status-pill grey">Advisory</span>
+            </div>
+
+            <div class="route-row">
+              <div>
+                <strong>Local stopping services</strong>
+                <span>Tees Valley Line stopping patterns and capacity</span>
+              </div>
+              <span class="status-pill green">Normal</span>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="col-lg-4">
+        <section class="dashboard-panel h-100">
+          <span class="dashboard-label">Passenger Voice</span>
+          <h3>Current themes</h3>
+
+          <ul class="theme-list">
+            <li>Darlington connection reliability</li>
+            <li>Redcar / Saltburn service patterns</li>
+            <li>Evening and weekend disruption</li>
+            <li>Accessibility and station facilities</li>
+          </ul>
+
+          <a href="contact.html" class="btn btn-tvl w-100 mt-3">Report an issue</a>
+        </section>
+      </div>
+    </div>
+
+    <div class="row g-4 mt-1">
+      <div class="col-lg-6">
+        <section class="dashboard-panel">
+          <span class="dashboard-label">Planned disruption</span>
+          <h3>Engineering works watch</h3>
+          <p>
+            Major works and route closures affecting Tees Valley passengers will be highlighted here.
+          </p>
+
+          <div class="notice-box">
+            Check National Rail, Northern, TPE and LNER journey planners before travelling.
+          </div>
+        </section>
+      </div>
+
+      <div class="col-lg-6">
+        <section class="dashboard-panel">
+          <span class="dashboard-label">Group activity</span>
+          <h3>TVL-RUG focus areas</h3>
+          <p>
+            We use passenger reports, operator updates and meeting feedback to raise practical issues with operators and stakeholders.
+          </p>
+
+          <div class="action-links">
+            <a href="meetings.html">View meetings</a>
+            <a href="news.html">Latest updates</a>
+            <a href="contact.html">Contact TVL-RUG</a>
+          </div>
+        </section>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer py-4">
+  <div class="container">
+    <p class="mb-0">&copy; TVL-RUG</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
