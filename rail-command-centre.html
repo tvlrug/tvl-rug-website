@@ -96,7 +96,33 @@
         Last updated: manual demonstration data
       </div>
     </div>
+<section class="chart-grid mb-4">
 
+  <div class="dashboard-panel chart-panel">
+    <span class="dashboard-label">Delay trend</span>
+    <h3>Average delay across the day</h3>
+    <canvas id="delayTrendChart"></canvas>
+  </div>
+
+  <div class="dashboard-panel chart-panel">
+    <span class="dashboard-label">Operator split</span>
+    <h3>Monitored route activity</h3>
+    <canvas id="operatorSplitChart"></canvas>
+  </div>
+
+  <div class="dashboard-panel chart-panel">
+    <span class="dashboard-label">Passenger reports</span>
+    <h3>Issues by category</h3>
+    <canvas id="issueTypeChart"></canvas>
+  </div>
+
+  <div class="dashboard-panel chart-panel">
+    <span class="dashboard-label">Punctuality</span>
+    <h3>On-time vs delayed</h3>
+    <canvas id="punctualityChart"></canvas>
+  </div>
+
+</section>
     <section class="mock-dashboard-grid mb-4">
       <div class="mock-kpi good">
         <span>On-time score</span>
