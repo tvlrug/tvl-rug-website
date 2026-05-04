@@ -44,7 +44,7 @@
         <span class="command-kicker">TVL-RUG Rail Command Centre</span>
         <h1>Passenger intelligence for the Tees Valley Line</h1>
         <p>
-          A dashboard-style view of key route flows, disruption themes, connection risks,
+          A dashboard-style view of route flows, disruption themes, connection risks,
           passenger reports and planned works affecting the Tees Valley Line.
         </p>
 
@@ -96,33 +96,7 @@
         Last updated: manual demonstration data
       </div>
     </div>
-<section class="chart-grid mb-4">
 
-  <div class="dashboard-panel chart-panel">
-    <span class="dashboard-label">Delay trend</span>
-    <h3>Average delay across the day</h3>
-    <canvas id="delayTrendChart"></canvas>
-  </div>
-
-  <div class="dashboard-panel chart-panel">
-    <span class="dashboard-label">Operator split</span>
-    <h3>Monitored route activity</h3>
-    <canvas id="operatorSplitChart"></canvas>
-  </div>
-
-  <div class="dashboard-panel chart-panel">
-    <span class="dashboard-label">Passenger reports</span>
-    <h3>Issues by category</h3>
-    <canvas id="issueTypeChart"></canvas>
-  </div>
-
-  <div class="dashboard-panel chart-panel">
-    <span class="dashboard-label">Punctuality</span>
-    <h3>On-time vs delayed</h3>
-    <canvas id="punctualityChart"></canvas>
-  </div>
-
-</section>
     <section class="mock-dashboard-grid mb-4">
       <div class="mock-kpi good">
         <span>On-time score</span>
@@ -146,6 +120,32 @@
         <span>Passenger reports</span>
         <strong>12</strong>
         <small>Submitted this week</small>
+      </div>
+    </section>
+
+    <section class="chart-grid mb-4">
+      <div class="dashboard-panel chart-panel">
+        <span class="dashboard-label">Delay trend</span>
+        <h3>Average delay across the day</h3>
+        <canvas id="delayTrendChart"></canvas>
+      </div>
+
+      <div class="dashboard-panel chart-panel">
+        <span class="dashboard-label">Operator split</span>
+        <h3>Monitored route activity</h3>
+        <canvas id="operatorSplitChart"></canvas>
+      </div>
+
+      <div class="dashboard-panel chart-panel">
+        <span class="dashboard-label">Passenger reports</span>
+        <h3>Issues by category</h3>
+        <canvas id="issueTypeChart"></canvas>
+      </div>
+
+      <div class="dashboard-panel chart-panel">
+        <span class="dashboard-label">Punctuality</span>
+        <h3>On-time vs delayed</h3>
+        <canvas id="punctualityChart"></canvas>
       </div>
     </section>
 
@@ -354,5 +354,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="js/rail-command-centre.js"></script>
+
 </body>
 </html>
