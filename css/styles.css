@@ -1373,6 +1373,26 @@ body {
   .mock-dashboard-grid {
     grid-template-columns: 1fr;
   }
+  .chart-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.chart-panel {
+  min-height: 360px;
+}
+
+.chart-panel canvas {
+  max-height: 260px;
+  margin-top: 1rem;
+}
+
+@media (max-width: 992px) {
+  .chart-grid {
+    grid-template-columns: 1fr;
+  }
+}
 }
 }
 }
