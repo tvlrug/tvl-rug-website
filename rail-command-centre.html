@@ -5,15 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rail Command Centre | TVL-RUG</title>
 
+  <meta name="description" content="TVL-RUG Rail Command Centre: a dashboard-style view of Tees Valley Line passenger intelligence, disruption themes and route watch information." />
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
 </head>
 
-<body>
+<body class="command-page">
 
 <nav class="navbar navbar-expand-lg navbar-dark">
   <div class="container">
-    <a class="navbar-brand" href="index.html">TVL-RUG</a>
+    <a class="navbar-brand d-flex align-items-center" href="index.html">
+      <img src="images/tvlrug-logo.jpg" alt="TVL-RUG logo" class="logo-small me-2">
+      TVL-RUG
+    </a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
       <span class="navbar-toggler-icon"></span>
@@ -34,13 +39,50 @@
 
 <header class="command-hero">
   <div class="container">
-    <span class="command-kicker">TVL-RUG Rail Command Centre</span>
-    <h1>Passenger intelligence for the Tees Valley Line</h1>
-    <p>
-      A dashboard-style view of key routes, disruption themes, engineering work and passenger feedback priorities.
-    </p>
+    <div class="command-hero-grid">
+      <div>
+        <span class="command-kicker">TVL-RUG Rail Command Centre</span>
+        <h1>Passenger intelligence for the Tees Valley Line</h1>
+        <p>
+          A dashboard-style view of key route flows, disruption themes, connection risks,
+          passenger reports and planned works affecting the Tees Valley Line.
+        </p>
+
+        <div class="command-actions">
+          <a href="contact.html" class="btn btn-tvl">Report an issue</a>
+          <a href="meetings.html" class="btn btn-outline-light">Raise at a meeting</a>
+        </div>
+      </div>
+
+      <div class="command-system-card">
+        <span class="system-live"><i></i> Simulated live dashboard</span>
+        <h2>Operational snapshot</h2>
+        <p>This dashboard currently uses demonstration data while the Rail Data Hub is developed.</p>
+
+        <div class="system-mini-grid">
+          <div>
+            <strong>4</strong>
+            <span>Route flows</span>
+          </div>
+          <div>
+            <strong>12</strong>
+            <span>Reports</span>
+          </div>
+          <div>
+            <strong>3</strong>
+            <span>Alerts</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </header>
+
+<div class="system-bar">
+  <div>Control system: TVL-RUG RCC</div>
+  <div>Status: Operational</div>
+  <div>Refresh mode: Manual snapshot</div>
+</div>
 
 <main class="command-dashboard py-5">
   <div class="container">
@@ -51,67 +93,70 @@
         <h2>Route overview</h2>
       </div>
       <div class="last-updated">
-        Last updated: manual snapshot
+        Last updated: manual demonstration data
       </div>
     </div>
 
-    <section class="control-grid mb-4">
+    <section class="mock-dashboard-grid mb-4">
+      <div class="mock-kpi good">
+        <span>On-time score</span>
+        <strong>84%</strong>
+        <small>Tees Valley local services today</small>
+      </div>
 
-  <div class="kpi-tile">
-    <span class="kpi-label">Services monitored</span>
-    <strong>42</strong>
-    <small>Today</small>
-  </div>
+      <div class="mock-kpi warning">
+        <span>Average delay</span>
+        <strong>6.4m</strong>
+        <small>Across monitored services</small>
+      </div>
 
-  <div class="kpi-tile warning">
-    <span class="kpi-label">Delays flagged</span>
-    <strong>7</strong>
-    <small>5+ minutes</small>
-  </div>
+      <div class="mock-kpi danger">
+        <span>Cancellations</span>
+        <strong>3</strong>
+        <small>Known issues affecting route flows</small>
+      </div>
 
-  <div class="kpi-tile danger">
-    <span class="kpi-label">Cancellations</span>
-    <strong>2</strong>
-    <small>Known issues</small>
-  </div>
+      <div class="mock-kpi info">
+        <span>Passenger reports</span>
+        <strong>12</strong>
+        <small>Submitted this week</small>
+      </div>
+    </section>
 
-  <div class="kpi-tile">
-    <span class="kpi-label">Passenger reports</span>
-    <strong>5</strong>
-    <small>This week</small>
-  </div>
+    <section class="route-map-panel mb-4">
+      <div class="panel-header">
+        <div>
+          <span class="dashboard-label">Route intelligence map</span>
+          <h3>Tees Valley Line operational watch</h3>
+        </div>
 
-</section>
+        <span class="live-indicator">
+          <span></span> Simulated live view
+        </span>
+      </div>
 
-<section class="route-map-panel mb-4">
-  <div class="panel-header">
-    <div>
-      <span class="dashboard-label">Route map</span>
-      <h3>Tees Valley Line watch</h3>
-    </div>
-    <span class="live-indicator">
-      <span></span> Live-style view
-    </span>
-  </div>
+      <div class="route-map">
+        <div class="station terminus">Saltburn</div>
+        <div class="line active"></div>
 
-  <div class="route-map">
-    <div class="station terminus">Saltburn</div>
-    <div class="line active"></div>
-    <div class="station">Redcar Central</div>
-    <div class="line active"></div>
-    <div class="station pulse">Middlesbrough</div>
-    <div class="line warning"></div>
-    <div class="station">Thornaby</div>
-    <div class="line warning"></div>
-    <div class="station hotspot">Darlington</div>
-  </div>
+        <div class="station">Redcar Central</div>
+        <div class="line active"></div>
 
-  <div class="map-legend">
-    <span><i class="legend-dot green"></i> Normal</span>
-    <span><i class="legend-dot amber"></i> Monitoring</span>
-    <span><i class="legend-dot red"></i> Hotspot</span>
-  </div>
-</section>
+        <div class="station pulse">Middlesbrough</div>
+        <div class="line warning"></div>
+
+        <div class="station">Thornaby</div>
+        <div class="line warning"></div>
+
+        <div class="station hotspot">Darlington</div>
+      </div>
+
+      <div class="map-legend">
+        <span><i class="legend-dot green"></i> Normal</span>
+        <span><i class="legend-dot amber"></i> Monitoring</span>
+        <span><i class="legend-dot red"></i> Passenger hotspot</span>
+      </div>
+    </section>
 
     <div class="row g-4 mb-4">
       <div class="col-lg-3 col-md-6">
@@ -126,7 +171,7 @@
       <div class="col-lg-3 col-md-6">
         <div class="metric-card">
           <span class="metric-label">TPE</span>
-          <h3>Check before travel</h3>
+          <h3>Long-distance watch</h3>
           <p>Redcar / Middlesbrough – Manchester</p>
           <span class="status-pill amber">Monitoring</span>
         </div>
@@ -135,7 +180,7 @@
       <div class="col-lg-3 col-md-6">
         <div class="metric-card">
           <span class="metric-label">Connections</span>
-          <h3>Darlington watch</h3>
+          <h3>Darlington risk</h3>
           <p>East Coast / Bishop Auckland interchange</p>
           <span class="status-pill red">Passenger concern</span>
         </div>
@@ -153,7 +198,7 @@
 
     <div class="row g-4">
       <div class="col-lg-8">
-        <section class="dashboard-panel">
+        <section class="dashboard-panel h-100">
           <div class="panel-header">
             <div>
               <span class="dashboard-label">Live-style board</span>
@@ -164,7 +209,7 @@
           <div class="route-board">
             <div class="route-row">
               <div>
-                <strong>Northern</strong>
+                <strong>Northern local services</strong>
                 <span>Saltburn · Redcar · Middlesbrough · Darlington</span>
               </div>
               <span class="status-pill amber">Monitor</span>
@@ -224,7 +269,7 @@
           </p>
 
           <div class="notice-box">
-            Check National Rail, Northern, TPE and LNER journey planners before travelling.
+            Always check National Rail, Northern, TPE and LNER journey planners before travelling.
           </div>
         </section>
       </div>
@@ -234,7 +279,8 @@
           <span class="dashboard-label">Group activity</span>
           <h3>TVL-RUG focus areas</h3>
           <p>
-            We use passenger reports, operator updates and meeting feedback to raise practical issues with operators and stakeholders.
+            We use passenger reports, operator updates and meeting feedback to raise practical issues
+            with operators and stakeholders.
           </p>
 
           <div class="action-links">
@@ -245,6 +291,30 @@
         </section>
       </div>
     </div>
+
+    <section class="dashboard-panel mt-4">
+      <div class="panel-header">
+        <div>
+          <span class="dashboard-label">Future Rail Data Hub</span>
+          <h3>What this dashboard will become</h3>
+        </div>
+      </div>
+
+      <div class="future-grid">
+        <div>
+          <strong>Phase 1</strong>
+          <span>Visual dashboard using demonstration data.</span>
+        </div>
+        <div>
+          <strong>Phase 2</strong>
+          <span>Manual JSON updates for service status and passenger themes.</span>
+        </div>
+        <div>
+          <strong>Phase 3</strong>
+          <span>Automated rail data feeds, trend analysis and corridor reporting.</span>
+        </div>
+      </div>
+    </section>
 
   </div>
 </main>
