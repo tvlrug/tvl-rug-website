@@ -906,5 +906,13 @@ body {
     flex-direction: column;
     align-items: flex-start;
   }
+  .command-dashboard {
+  background: #0f1217;
+  color: #e5e7eb;
+}
+
+body {
+  background: #0f1217;
+}
 }
 }
