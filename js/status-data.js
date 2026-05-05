@@ -43,6 +43,7 @@ const serviceStatus = {
       issue: "Emergency services are dealing with an incident between Doncaster and Newark Northgate. All lines are currently closed.",
       impact: "Trains running through this section may be cancelled, delayed by up to 30 minutes or revised. This may affect journeys to and from London, York, Darlington, Teesside and the wider North East.",
       advice: "Passengers should check before travelling using National Rail Enquiries or their train operator. Allow extra time and consider alternative routes where available."
+      further information: "https://www.lner.co.uk/travel-information/travel-updates/"
     }
   ],
 
