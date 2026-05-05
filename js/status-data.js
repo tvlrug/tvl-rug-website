@@ -1,4 +1,4 @@
-const serviceStatus = {
+window serviceStatus = {
   updated: "Expected until 14:00",
 
   overall: "major",
