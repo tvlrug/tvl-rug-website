@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  applyEngineeringEscalation();
+  applyOverallEscalation();
 
   if (document.querySelector("#homepageStatus")) {
     renderHomepageStatus();
@@ -58,18 +58,46 @@ function getVisibleEngineeringWorks() {
   );
 }
 
-function applyEngineeringEscalation() {
-  const activeWorks = serviceStatus.engineeringWorks?.some(isEngineeringActive);
+function hasActiveEngineeringWorks() {
+  return serviceStatus.engineeringWorks?.some(isEngineeringActive);
+}
 
-  if (activeWorks) {
+function hasMajorRouteDisruption() {
+  return serviceStatus.routes?.some(route => route.status === "major");
+}
+
+function hasMinorRouteDisruption() {
+  return serviceStatus.routes?.some(route => route.status === "minor");
+}
+
+function applyOverallEscalation() {
+  const activeWorks = hasActiveEngineeringWorks();
+  const majorDisruption = hasMajorRouteDisruption();
+  const minorDisruption = hasMinorRouteDisruption();
+
+  if (majorDisruption || activeWorks) {
     serviceStatus.overall = "major";
+    return;
   }
+
+  if (minorDisruption) {
+    serviceStatus.overall = "minor";
+    return;
+  }
+
+  serviceStatus.overall = "good";
 }
 
 function getOverallLabel(status) {
   if (status === "good") return "Good service";
   if (status === "minor") return "Disruption possible";
-  if (status === "major") return "Engineering works active";
+
+  if (status === "major") {
+    if (hasMajorRouteDisruption()) return "Major disruption";
+    if (hasActiveEngineeringWorks()) return "Engineering works active";
+    return "Major disruption";
+  }
+
   return "Service update";
 }
 
@@ -80,12 +108,27 @@ function renderHomepageStatus() {
   const label = document.querySelector("#homepageStatusLabel");
   const updated = document.querySelector("#homepageStatusUpdated");
 
+  if (!strip) return;
+
   strip.className = `status-strip-inner status-${serviceStatus.overall}`;
 
-  if (dot) dot.className = `status-dot status-dot-${serviceStatus.overall}`;
-  if (label) label.textContent = getOverallLabel(serviceStatus.overall);
-  if (text) text.textContent = serviceStatus.routes.map(route => route.short).join(" · ");
-  if (updated) updated.textContent = `Updated: ${serviceStatus.updated}`;
+  if (dot) {
+    dot.className = `status-dot status-dot-${serviceStatus.overall}`;
+  }
+
+  if (label) {
+    label.textContent = getOverallLabel(serviceStatus.overall);
+  }
+
+  if (text) {
+    text.textContent = serviceStatus.routes
+      .map(route => route.short)
+      .join(" · ");
+  }
+
+  if (updated) {
+    updated.textContent = `Updated: ${serviceStatus.updated}`;
+  }
 }
 
 function renderHomepageEngineeringBanner() {
@@ -95,7 +138,8 @@ function renderHomepageEngineeringBanner() {
   if (!banner) return;
 
   if (visibleWorks.length === 0) {
-    banner.closest(".engineering-strip").style.display = "none";
+    const strip = banner.closest(".engineering-strip");
+    if (strip) strip.style.display = "none";
     return;
   }
 
@@ -122,6 +166,8 @@ function renderHomepageEngineeringBanner() {
 function renderServiceStatusCards() {
   const container = document.querySelector("#serviceStatusCards");
 
+  if (!container) return;
+
   container.innerHTML = serviceStatus.routes.map(route => `
     <div class="col-lg-6">
       <div class="status-route-card status-${route.status} status-card-animate">
@@ -147,16 +193,19 @@ function renderServiceStatusCards() {
 
 function renderServiceStatusOverview() {
   const overview = document.querySelector("#serviceStatusOverview");
-  const activeWorks = serviceStatus.engineeringWorks?.some(isEngineeringActive);
-  const minor = serviceStatus.routes.some(route => route.status === "minor");
-  const major = serviceStatus.routes.some(route => route.status === "major");
 
-  if (activeWorks) {
-    overview.textContent =
-      "Engineering works are currently active on part of the wider route. Rail replacement buses may be in operation. Passengers should check before travelling and allow extra time.";
-  } else if (major) {
+  if (!overview) return;
+
+  const activeWorks = hasActiveEngineeringWorks();
+  const minor = hasMinorRouteDisruption();
+  const major = hasMajorRouteDisruption();
+
+  if (major) {
     overview.textContent =
       "Major disruption is currently affecting one or more monitored service groups. Passengers should check official operator and National Rail information before travelling.";
+  } else if (activeWorks) {
+    overview.textContent =
+      "Engineering works are currently active on part of the wider route. Rail replacement buses may be in operation. Passengers should check before travelling and allow extra time.";
   } else if (minor) {
     overview.textContent =
       "No major disruption is currently reported, but passengers should check before travelling on longer-distance services or where alterations may apply.";
