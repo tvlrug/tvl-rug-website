@@ -52,19 +52,19 @@ const serviceStatus = {
 // 🔴 EXAMPLE INCIDENT (UNCOMMENT WHEN NEEDED)
 // =============================================
 
-// {
-//   id: "tpe",
-//   label: "Major disruption",
-//   status: "major",
-//   icon: "bi-exclamation-octagon-fill",
-//   title: "Northern TPE (Redcar Central ↔ Manchester) (via York and Leeds)",
-//   short: "TPE towards Manchester: Major disruption — check before travelling",
+ {
+   id: "LNER",
+   label: "Major disruption",
+   status: "major",
+   icon: "bi-exclamation-octagon-fill",
+   title: "ECML: All lines closed between Doncaster and Retford",
+   short: "Disruption expected until 14:00",
 
-//   issue: "Signalling failure between York and Northallerton",
+   issue: "ECML Disruption between Retford and Doncaster until 14:00",
 
-//   impact: "Services are subject to significant delays and cancellations. Some services are starting and terminating early or not running.",
+   impact: "There is major disruption between Retford and Doncaster due to a person being hit by a train. LNER are working with Network Rail to get our services moving again as quickly as possible. Please check your entire journey using the planner below before you travel.",
 
-//   advice: "Passengers should check before travelling. Consider alternative routes where possible and allow extra time for your journey.",
+   advice: "Passengers should check before travelling. Consider alternative routes where possible and allow extra time for your journey.",
 
 //   incidentUrl: "incident-2026-05-02-york-darlington.html"
 // },
