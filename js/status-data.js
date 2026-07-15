@@ -1,5 +1,5 @@
 window.serviceStatus = {
-  updated: "25 Apr 2026, 23:30",
+  updated: "15 Jul 2026, 09:50",
 
   overall: "minor",
 
@@ -21,15 +21,15 @@ window.serviceStatus = {
 
     {
       id: "tpe",
-      label: "Disruption possible",
-      status: "minor",
-      icon: "bi-exclamation-triangle-fill",
+      label: "Good service",
+      status: "good",
+      icon: "bi-check-circle-fill",
       title: "TransPennine Express (Redcar Central ↔ Manchester via York and Leeds)",
       short: "TPE towards Manchester: Disruption possible — check before travelling",
-      issue: "Longer-distance services can be more variable.",
-      impact: "Services may be subject to delays or alterations.",
-      advice: "Check before travelling."
-
+      issue: "No reported issues.",
+      impact: "Services are operating normally across all stations.",
+      advice: "No action required."
+      
       // Incident example:
       // incidentUrl: "incident-example.html"
     }
