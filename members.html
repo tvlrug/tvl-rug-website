@@ -3,222 +3,457 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TVL-RUG | Members Hub</title>
-  <meta name="description" content="Members hub for TVL-RUG documents, minutes, updates and resources." />
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <title>TVL-RUG | Members Hub</title>
+
+  <meta
+    name="description"
+    content="Secure members hub for TVL-RUG meeting papers, minutes, newsletters, briefings and member resources."
+  />
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    rel="stylesheet"
+  >
+
   <link href="css/styles.css?v=24" rel="stylesheet">
 </head>
+
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark">
-  <div class="container">
-    <a class="navbar-brand d-flex align-items-center" href="index.html">
-      <img src="images/tvlrug-logo.jpg" alt="TVL-RUG logo" class="logo-small">
-      TVL-RUG
-    </a>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <img
+          src="images/tvlrug-logo.jpg"
+          alt="TVL-RUG logo"
+          class="logo-small"
+        >
+        TVL-RUG
+      </a>
 
-    <div class="collapse navbar-collapse" id="mainNav">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="meetings.html">Meetings</a></li>
-        <li class="nav-item"><a class="nav-link" href="route.html">The Route</a></li>
-        <li class="nav-item"><a class="nav-link" href="service-status.html">Service Status</a></li>
-        <li class="nav-item"><a class="nav-link" href="news.html">News</a></li>
-        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-      </ul>
       <button
-  id="logout-button"
-  class="btn btn-outline-danger"
-  type="button">
-  Sign out
-</button>
-    </div>
-  </div>
-</nav>
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#mainNav"
+        aria-controls="mainNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-<header class="page-header">
-  <div class="container">
-    <h1>Members Hub</h1>
-    <p>
-      A secure space for TVL-RUG members to access papers, minutes, newsletters, updates and group resources.
-    </p>
-  </div>
-</header>
+      <div class="collapse navbar-collapse" id="mainNav">
 
-<main class="page-content">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
-  <section class="section">
-    <div class="container">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
 
-      <div class="card p-4 p-lg-5 mb-4">
-        <div class="row align-items-center g-4">
-          <div class="col-lg-8">
-            <span class="badge-news mb-3 d-inline-block">Access controlled</span>
-            <h2 class="h3 mb-3">Members login is being prepared</h2>
-            <p class="mb-0">
-              This dashboard preview shows the planned members area. Once login is enabled, members will be able to access approved documents, meeting information, newsletters and internal updates from here.
-            </p>
-          </div>
-          <div class="col-lg-4 text-lg-end">
-            <i class="bi bi-shield-lock-fill" style="font-size: 4rem; color: var(--tvl-red);"></i>
-          </div>
-        </div>
-      </div>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About</a>
+          </li>
 
-      <div class="row g-4">
+          <li class="nav-item">
+            <a class="nav-link" href="meetings.html">Meetings</a>
+          </li>
 
-        <div class="col-md-6 col-xl-3">
-          <div class="card p-4 h-100 locked-card">
-            <div class="feature-icon"><i class="bi bi-folder2-open"></i></div>
-            <h3 class="h5">Meeting papers</h3>
-            <p>Agendas, reports and supporting documents for upcoming TVL-RUG meetings.</p>
-            <button class="btn btn-outline-tvl btn-sm mt-auto" disabled>
-              <i class="bi bi-lock-fill"></i> Locked
-            </button>
-          </div>
-        </div>
+          <li class="nav-item">
+            <a class="nav-link" href="route.html">The Route</a>
+          </li>
 
-        <div class="col-md-6 col-xl-3">
-          <div class="card p-4 h-100 locked-card">
-            <div class="feature-icon"><i class="bi bi-journal-text"></i></div>
-            <h3 class="h5">Minutes archive</h3>
-            <p>Approved minutes and formal records from previous group meetings.</p>
-            <button class="btn btn-outline-tvl btn-sm mt-auto" disabled>
-              <i class="bi bi-lock-fill"></i> Locked
-            </button>
-          </div>
-        </div>
+          <li class="nav-item">
+            <a class="nav-link" href="service-status.html">Service Status</a>
+          </li>
 
-        <div class="col-md-6 col-xl-3">
-          <div class="card p-4 h-100 locked-card">
-            <div class="feature-icon"><i class="bi bi-newspaper"></i></div>
-            <h3 class="h5">Newsletters</h3>
-            <p>Member newsletters, stakeholder updates and group communications.</p>
-            <button class="btn btn-outline-tvl btn-sm mt-auto" disabled>
-              <i class="bi bi-lock-fill"></i> Locked
-            </button>
-          </div>
-        </div>
+          <li class="nav-item">
+            <a class="nav-link" href="news.html">News</a>
+          </li>
 
-        <div class="col-md-6 col-xl-3">
-          <div class="card p-4 h-100 locked-card">
-            <div class="feature-icon"><i class="bi bi-megaphone"></i></div>
-            <h3 class="h5">Member briefings</h3>
-            <p>Internal notices, working updates and member-only briefing material.</p>
-            <button class="btn btn-outline-tvl btn-sm mt-auto" disabled>
-              <i class="bi bi-lock-fill"></i> Locked
-            </button>
-          </div>
-        </div>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+
+        </ul>
+
+        <button
+          id="logout-button"
+          class="btn btn-outline-danger ms-lg-3"
+          type="button"
+        >
+          <i class="bi bi-box-arrow-right me-1"></i>
+          Sign out
+        </button>
 
       </div>
+    </div>
+  </nav>
+
+  <header class="page-header">
+    <div class="container">
+
+      <h1>Members Hub</h1>
+
+      <p>
+        A secure space for TVL-RUG members to access papers,
+        minutes, newsletters, updates and group resources.
+      </p>
 
     </div>
-  </section>
+  </header>
 
-  <section class="section section-light">
-    <div class="container">
-      <div class="row g-4 align-items-stretch">
+  <main class="page-content">
 
-        <div class="col-lg-7">
-          <div class="card p-4 h-100">
-            <h2 class="h4 mb-3">Planned member resources</h2>
-            <ul class="info-list">
-              <li>Meeting agendas and papers</li>
-              <li>Approved minutes and action logs</li>
-              <li>Newsletter and stakeholder briefing archive</li>
-              <li>Committee and working group resources</li>
-              <li>Useful templates and group documentation</li>
-            </ul>
-          </div>
-        </div>
+    <section class="section">
+      <div class="container">
 
-        <div class="col-lg-5">
-          <div class="card p-4 h-100">
-            <h2 class="h4 mb-3">Access status</h2>
-            <p class="mb-3">
-              Member authentication is not yet enabled. This area is currently shown as a preview of the planned structure.
-            </p>
-            <div class="callout">
-              <strong>Coming next:</strong>
-              <p class="mb-0 mt-2">
-                Login access, restricted content and document areas will be added as the members hub develops.
+        <div class="card p-4 p-lg-5 mb-4">
+
+          <div class="row align-items-center g-4">
+
+            <div class="col-lg-8">
+
+              <span class="badge-news mb-3 d-inline-block">
+                Members only
+              </span>
+
+              <h2 class="h3 mb-3">
+                Welcome to the Members Hub
+              </h2>
+
+              <p class="mb-0">
+                Access TVL-RUG meeting papers, approved minutes,
+                newsletters, member briefings and other group resources.
               </p>
+
+            </div>
+
+            <div class="col-lg-4 text-lg-end">
+
+              <i
+                class="bi bi-shield-check"
+                style="font-size: 4rem; color: var(--tvl-red);"
+              ></i>
+
+            </div>
+
+          </div>
+        </div>
+
+        <div class="row g-4">
+
+          <div class="col-md-6 col-xl-3">
+            <div class="card p-4 h-100">
+
+              <div class="feature-icon">
+                <i class="bi bi-folder2-open"></i>
+              </div>
+
+              <h3 class="h5">
+                Meeting papers
+              </h3>
+
+              <p>
+                Agendas, reports and supporting documents for
+                upcoming TVL-RUG meetings.
+              </p>
+
+              <a
+                href="members/meeting-papers.html"
+                class="btn btn-outline-tvl btn-sm mt-auto"
+              >
+                <i class="bi bi-folder2-open me-1"></i>
+                Open
+              </a>
+
             </div>
           </div>
+
+          <div class="col-md-6 col-xl-3">
+            <div class="card p-4 h-100">
+
+              <div class="feature-icon">
+                <i class="bi bi-journal-text"></i>
+              </div>
+
+              <h3 class="h5">
+                Minutes archive
+              </h3>
+
+              <p>
+                Approved minutes and formal records from previous
+                TVL-RUG meetings.
+              </p>
+
+              <a
+                href="members/minutes.html"
+                class="btn btn-outline-tvl btn-sm mt-auto"
+              >
+                <i class="bi bi-journal-text me-1"></i>
+                Open
+              </a>
+
+            </div>
+          </div>
+
+          <div class="col-md-6 col-xl-3">
+            <div class="card p-4 h-100">
+
+              <div class="feature-icon">
+                <i class="bi bi-newspaper"></i>
+              </div>
+
+              <h3 class="h5">
+                Newsletters
+              </h3>
+
+              <p>
+                Member newsletters, stakeholder updates and
+                group communications.
+              </p>
+
+              <a
+                href="members/newsletters.html"
+                class="btn btn-outline-tvl btn-sm mt-auto"
+              >
+                <i class="bi bi-newspaper me-1"></i>
+                Open
+              </a>
+
+            </div>
+          </div>
+
+          <div class="col-md-6 col-xl-3">
+            <div class="card p-4 h-100">
+
+              <div class="feature-icon">
+                <i class="bi bi-megaphone"></i>
+              </div>
+
+              <h3 class="h5">
+                Member briefings
+              </h3>
+
+              <p>
+                Internal notices, working updates and
+                member-only briefing material.
+              </p>
+
+              <a
+                href="members/briefings.html"
+                class="btn btn-outline-tvl btn-sm mt-auto"
+              >
+                <i class="bi bi-megaphone me-1"></i>
+                Open
+              </a>
+
+            </div>
+          </div>
+
         </div>
 
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section">
+    <section class="section section-light">
+      <div class="container">
+
+        <div class="row g-4 align-items-stretch">
+
+          <div class="col-lg-7">
+
+            <div class="card p-4 h-100">
+
+              <h2 class="h4 mb-3">
+                Member resources
+              </h2>
+
+              <ul class="info-list">
+
+                <li>
+                  Meeting agendas and papers
+                </li>
+
+                <li>
+                  Approved minutes and action logs
+                </li>
+
+                <li>
+                  Newsletter and stakeholder briefing archive
+                </li>
+
+                <li>
+                  Committee and working group resources
+                </li>
+
+                <li>
+                  Useful templates and group documentation
+                </li>
+
+              </ul>
+
+            </div>
+
+          </div>
+
+          <div class="col-lg-5">
+
+            <div class="card p-4 h-100">
+
+              <h2 class="h4 mb-3">
+                Access status
+              </h2>
+
+              <p class="mb-3">
+                You are signed in to the TVL-RUG Members Hub.
+              </p>
+
+              <div class="callout">
+
+                <strong>
+                  Member access
+                </strong>
+
+                <p class="mb-0 mt-2">
+                  Resources shown within this area are intended
+                  for authorised TVL-RUG members and should not
+                  be shared outside the group unless approved.
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+
+        <div class="callout">
+
+          <div class="row align-items-center g-3">
+
+            <div class="col-lg-8">
+
+              <h2 class="h4 mb-2">
+                Need help?
+              </h2>
+
+              <p class="mb-0">
+                If you cannot find a document or believe you should
+                have access to additional resources, contact TVL-RUG.
+              </p>
+
+            </div>
+
+            <div class="col-lg-4 text-lg-end">
+
+              <a
+                href="contact.html"
+                class="btn btn-tvl"
+              >
+                Contact TVL-RUG
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+
     <div class="container">
-      <div class="callout">
-        <div class="row align-items-center g-3">
-          <div class="col-lg-8">
-            <h2 class="h4 mb-2">Need access when the hub opens?</h2>
-            <p class="mb-0">
-              Members and stakeholders can contact TVL-RUG for information about future access to the members area.
-            </p>
-          </div>
-          <div class="col-lg-4 text-lg-end">
-            <a href="contact.html" class="btn btn-tvl">Contact TVL-RUG</a>
-          </div>
+
+      <div class="row g-3 align-items-center">
+
+        <div class="col-lg-4">
+          © Powered by CraggleNett Solutions, 2026
         </div>
+
+        <div class="col-lg-4 text-lg-center">
+
+          <a href="about.html">About</a>
+          ·
+          <a href="meetings.html">Meetings</a>
+          ·
+          <a href="route.html">The Route</a>
+          ·
+          <a href="service-status.html">Service Status</a>
+          ·
+          <a href="news.html">News</a>
+          ·
+          <a href="contact.html">Contact</a>
+
+        </div>
+
+        <div class="col-lg-4 text-lg-end">
+
+          <a href="mailto:contact@tvl-rug.org.uk">
+            contact@tvl-rug.org.uk
+          </a>
+
+          ·
+
+          <a
+            href="https://www.facebook.com/tvlrailusergroup/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Facebook
+          </a>
+
+        </div>
+
       </div>
+
     </div>
-  </section>
 
-</main>
+  </footer>
 
-<footer class="footer">
-  <div class="container">
-    <div class="row g-3 align-items-center">
-      <div class="col-lg-4">© Powered by CraggleNett Solutions, 2026</div>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+  </script>
 
-      <div class="col-lg-4 text-lg-center">
-        <a href="about.html">About</a> ·
-        <a href="meetings.html">Meetings</a> ·
-        <a href="route.html">The Route</a> ·
-        <a href="service-status.html">Service Status</a> ·
-        <a href="news.html">News</a> ·
-        <a href="contact.html">Contact</a>
-      </div>
+  <script type="module">
 
-      <div class="col-lg-4 text-lg-end">
-        <a href="mailto:contact@tvl-rug.org.uk">contact@tvl-rug.org.uk</a> ·
-        <a href="https://www.facebook.com/tvlrailusergroup/">Facebook</a>
-      </div>
-    </div>
-  </div>
-</footer>
+    import {
+      getCurrentUser,
+      logout
+    } from '/js/auth.js';
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    const user = await getCurrentUser();
+
+    if (!user) {
+      window.location.href = '/login.html';
+    }
+
+    const logoutButton =
+      document.getElementById('logout-button');
+
+    if (logoutButton) {
+      logoutButton.addEventListener('click', logout);
+    }
+
+  </script>
+
 </body>
-<script type="module">
-  import {
-    getCurrentUser,
-    logout
-  } from '/js/auth.js';
-
-  const user = await getCurrentUser();
-
-  if (!user) {
-    window.location.href = '/login.html';
-  }
-
-  const logoutButton = document.getElementById('logout-button');
-
-  if (logoutButton) {
-    logoutButton.addEventListener('click', logout);
-  }
-</script>
 </html>
