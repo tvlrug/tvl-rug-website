@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>TVL-RUG | Newsletters</title>
+
+  <meta
+    name="description"
+    content="TVL-RUG member newsletters, stakeholder updates and group communications."
+  />
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    rel="stylesheet"
+  >
+
+  <link href="../css/styles.css?v=24" rel="stylesheet">
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container">
+
+    <a class="navbar-brand d-flex align-items-center" href="../index.html">
+      <img
+        src="../images/tvlrug-logo.jpg"
+        alt="TVL-RUG logo"
+        class="logo-small"
+      >
+      TVL-RUG
+    </a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#mainNav"
+      aria-controls="mainNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNav">
+
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="../index.html">Home</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="../about.html">About</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="../meetings.html">Meetings</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="../route.html">The Route</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="../service-status.html">Service Status</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="../news.html">News</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="../contact.html">Contact</a>
+        </li>
+      </ul>
+
+      <button
+        id="logout-button"
+        class="btn btn-outline-danger ms-lg-3"
+        type="button"
+      >
+        <i class="bi bi-box-arrow-right me-1"></i>
+        Sign out
+      </button>
+
+    </div>
+
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="container">
+
+    <a
+      href="../members.html"
+      class="text-decoration-none d-inline-flex align-items-center mb-3"
+    >
+      <i class="bi bi-arrow-left me-2"></i>
+      Back to Members Hub
+    </a>
+
+    <h1>Newsletters</h1>
+
+    <p>
+      Member newsletters, stakeholder updates and group communications.
+    </p>
+
+  </div>
+</header>
+
+<main class="page-content">
+
+  <section class="section">
+    <div class="container">
+
+      <div class="card p-4 p-lg-5">
+
+        <div class="d-flex align-items-center mb-4">
+
+          <div class="feature-icon me-3">
+            <i class="bi bi-newspaper"></i>
+          </div>
+
+          <div>
+
+            <h2 class="h3 mb-1">
+              Newsletter Archive
+            </h2>
+
+            <p class="mb-0 text-muted">
+              Member newsletters and group communications will appear here.
+            </p>
+
+          </div>
+
+        </div>
+
+        <div class="callout">
+
+          <strong>
+            Newsletter area ready
+          </strong>
+
+          <p class="mb-0 mt-2">
+            This page is protected by member authentication.
+            TVL-RUG newsletters, stakeholder updates and other approved
+            group communications will be made available here.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+
+    <div class="row g-3 align-items-center">
+
+      <div class="col-lg-4">
+        © Powered by CraggleNett Solutions, 2026
+      </div>
+
+      <div class="col-lg-4 text-lg-center">
+        <a href="../members.html">Members Hub</a>
+        ·
+        <a href="../contact.html">Contact</a>
+      </div>
+
+      <div class="col-lg-4 text-lg-end">
+
+        <a href="mailto:contact@tvl-rug.org.uk">
+          contact@tvl-rug.org.uk
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+</footer>
+
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+<script type="module">
+
+  import {
+    requireAuth,
+    logout
+  } from '../js/auth.js';
+
+  await requireAuth();
+
+  const logoutButton =
+    document.getElementById('logout-button');
+
+  if (logoutButton) {
+    logoutButton.addEventListener('click', logout);
+  }
+
+</script>
+
+</body>
+</html>
