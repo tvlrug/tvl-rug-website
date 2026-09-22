@@ -5,7 +5,14 @@ const SUPABASE_PUBLISHABLE_KEY = 'YOUR_SUPABASE_PUBLISHABLE_KEY';
 
 export const supabase = createClient(
   SUPABASE_URL,
-  SUPABASE_PUBLISHABLE_KEY
+  SUPABASE_PUBLISHABLE_KEY,
+  {
+    auth: {
+      persistSession: true,
+      autoRefreshToken: true,
+      detectSessionInUrl: true
+    }
+  }
 );
 
 export async function getCurrentUser() {
@@ -34,6 +41,12 @@ export async function requireAuth() {
 }
 
 export async function logout() {
-  await supabase.auth.signOut();
-  window.location.href = '/';
+  const { error } = await supabase.auth.signOut();
+
+  if (error) {
+    console.error('Unable to sign out:', error);
+    return;
+  }
+
+  window.location.href = '/login.html';
 }
