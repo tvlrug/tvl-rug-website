@@ -99,7 +99,7 @@
                 </div>
                 <i class="bi ${style.icon} fs-3 text-${style.card}" aria-hidden="true"></i>
               </div>
-              <h3 class="h5 text-${style.card}">${escapeHtml(status)}</h3>
+              <h3 class="h6 text-${style.card}">${escapeHtml(status)}</h3>
               <dl class="row mb-3">
                 <dt class="col-sm-3">Issue</dt>
                 <dd class="col-sm-9">${escapeHtml(row.issue_text || "No current issue reported.")}</dd>
