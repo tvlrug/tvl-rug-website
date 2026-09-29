@@ -2,7 +2,7 @@
   "use strict";
 
   const SUPABASE_URL = "https://lopkjhmahofslsyfxrxp.supabase.co";
-  const SUPABASE_PUBLISHABLE_KEY = "PASTE_PUBLIC_PUBLISHABLE_KEY_HERE";
+  const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_KBtZGWGCZxh5j34F-aaijQ_rAc0kA3K";
 
   const SERVICE_ORDER = ["TVL_NT", "TPE_MANCHESTER"];
 
