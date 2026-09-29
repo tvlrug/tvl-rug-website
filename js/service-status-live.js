@@ -28,8 +28,10 @@
 
   function formatTime(value) {
     if (!value) return "Unknown";
+
     const date = new Date(value);
     if (Number.isNaN(date.getTime())) return "Unknown";
+
     return new Intl.DateTimeFormat("en-GB", {
       timeZone: "Europe/London",
       hour: "2-digit",
@@ -50,13 +52,13 @@
   }
 
   async function fetchStatus() {
-    if (!SUPABASE_PUBLISHABLE_KEY || SUPABASE_PUBLISHABLE_KEY === "PASTE_PUBLIC_PUBLISHABLE_KEY_HERE") {
-      throw new Error("Supabase publishable key has not been configured.");
-    }
-
     const url = new URL(`${SUPABASE_URL}/rest/v1/service_status`);
+
     url.searchParams.set("select", "*");
-    url.searchParams.set("service_group_code", `in.(${SERVICE_ORDER.join(",")})`);
+    url.searchParams.set(
+      "service_group_code",
+      `in.(${SERVICE_ORDER.join(",")})`
+    );
 
     const response = await fetch(url, {
       headers: {
@@ -67,11 +69,18 @@
     });
 
     if (!response.ok) {
-      throw new Error(`Supabase service-status request failed (${response.status}).`);
+      throw new Error(
+        `Supabase service-status request failed (${response.status}).`
+      );
     }
 
     const rows = await response.json();
-    rows.sort((a, b) => SERVICE_ORDER.indexOf(a.service_group_code) - SERVICE_ORDER.indexOf(b.service_group_code));
+
+    rows.sort((a, b) =>
+      SERVICE_ORDER.indexOf(a.service_group_code) -
+      SERVICE_ORDER.indexOf(b.service_group_code)
+    );
+
     return rows;
   }
 
@@ -80,7 +89,13 @@
     if (!container) return;
 
     if (!rows.length) {
-      container.innerHTML = '<div class="col-12"><div class="alert alert-secondary mb-0">Live service status is temporarily unavailable.</div></div>';
+      container.innerHTML = `
+        <div class="col-12">
+          <div class="alert alert-secondary mb-0">
+            Live service status is temporarily unavailable.
+          </div>
+        </div>
+      `;
       return;
     }
 
@@ -92,34 +107,68 @@
         <div class="col-lg-6">
           <article class="card h-100 border-${style.card}">
             <div class="card-body p-4">
+
               <div class="d-flex align-items-start justify-content-between gap-3 mb-3">
                 <div>
-                  <span class="badge text-bg-${style.card} mb-2">${escapeHtml(row.homepage_label)}</span>
-                  <h2 class="h4 mb-1">${escapeHtml(row.service_group_name)}</h2>
+                  <span class="badge text-bg-${style.card} mb-2">
+                    ${escapeHtml(row.homepage_label)}
+                  </span>
+
+                  <h2 class="service-card-title mb-1">
+                    ${escapeHtml(row.service_group_name)}
+                  </h2>
                 </div>
-                <i class="bi ${style.icon} fs-3 text-${style.card}" aria-hidden="true"></i>
+
+                <i
+                  class="bi ${style.icon} fs-3 text-${style.card}"
+                  aria-hidden="true"
+                ></i>
               </div>
-              <h3 class="h5 text-${style.card}">${escapeHtml(status)}</h3>
+
+              <h3 class="h5 text-${style.card}">
+                ${escapeHtml(status)}
+              </h3>
+
               <dl class="row mb-3">
                 <dt class="col-sm-3">Issue</dt>
-                <dd class="col-sm-9">${escapeHtml(row.issue_text || "No current issue reported.")}</dd>
+                <dd class="col-sm-9">
+                  ${escapeHtml(row.issue_text || "No current issue reported.")}
+                </dd>
+
                 <dt class="col-sm-3">Impact</dt>
-                <dd class="col-sm-9">${escapeHtml(row.impact_text || "No significant impact currently reported.")}</dd>
+                <dd class="col-sm-9">
+                  ${escapeHtml(row.impact_text || "No significant impact currently reported.")}
+                </dd>
+
                 <dt class="col-sm-3">Advice</dt>
-                <dd class="col-sm-9">${escapeHtml(row.advice_text || "Check your train before travelling.")}</dd>
+                <dd class="col-sm-9">
+                  ${escapeHtml(row.advice_text || "Check your train before travelling.")}
+                </dd>
               </dl>
-              <p class="small text-secondary mb-0">Updated ${escapeHtml(formatTime(row.data_as_of_utc || row.calculated_utc))}</p>
+
+              <p class="small text-secondary mb-0">
+                Updated ${escapeHtml(
+                  formatTime(row.data_as_of_utc || row.calculated_utc)
+                )}
+              </p>
+
             </div>
           </article>
-        </div>`;
+        </div>
+      `;
     }).join("");
   }
 
   function renderOverview(rows) {
     const element = document.getElementById("serviceStatusOverview");
     if (!element) return;
+
     element.textContent = rows.length
-      ? rows.map((row) => `${row.homepage_label}: ${displayStatus(row)}`).join(" • ")
+      ? rows
+          .map((row) =>
+            `${row.homepage_label}: ${displayStatus(row)}`
+          )
+          .join(" • ")
       : "Live service information is temporarily unavailable.";
   }
 
@@ -129,7 +178,10 @@
     const label = document.getElementById("homepageStatusLabel");
     const text = document.getElementById("homepageStatusText");
     const updated = document.getElementById("homepageStatusUpdated");
-    if (!wrapper || !dot || !label || !text || !updated) return;
+
+    if (!wrapper || !dot || !label || !text || !updated) {
+      return;
+    }
 
     if (!rows.length) {
       wrapper.className = "status-strip-inner status-minor";
@@ -141,23 +193,49 @@
     }
 
     const worst = [...rows].sort((a, b) => {
-      const aa = a.is_data_stale ? 99 : (a.primary_severity ?? 0);
-      const bb = b.is_data_stale ? 99 : (b.primary_severity ?? 0);
-      return bb - aa;
+      const aSeverity =
+        a.is_data_stale ? 99 : (a.primary_severity ?? 0);
+
+      const bSeverity =
+        b.is_data_stale ? 99 : (b.primary_severity ?? 0);
+
+      return bSeverity - aSeverity;
     })[0];
 
     const style = styleFor(worst);
-    wrapper.className = `status-strip-inner ${style.strip}`;
-    dot.className = `status-dot ${style.dot}`;
-    label.textContent = "Current service status";
-    text.textContent = rows.map((row) => `${row.homepage_label}: ${displayStatus(row)}`).join(" • ");
 
-    const newest = rows.map((row) => row.data_as_of_utc || row.calculated_utc).filter(Boolean).sort().at(-1);
-    updated.textContent = `Updated: ${formatTime(newest)}`;
+    wrapper.className =
+      `status-strip-inner ${style.strip}`;
+
+    dot.className =
+      `status-dot ${style.dot}`;
+
+    label.textContent = "Current service status";
+
+    text.textContent = rows
+      .map((row) =>
+        `${row.homepage_label}: ${displayStatus(row)}`
+      )
+      .join(" • ");
+
+    const newest = rows
+      .map((row) =>
+        row.data_as_of_utc || row.calculated_utc
+      )
+      .filter(Boolean)
+      .sort()
+      .at(-1);
+
+    updated.textContent =
+      `Updated: ${formatTime(newest)}`;
   }
 
   function renderFailure(error) {
-    console.error("TVL-RUG service status:", error);
+    console.error(
+      "TVL-RUG service status:",
+      error
+    );
+
     renderServiceCards([]);
     renderOverview([]);
     renderHomepage([]);
@@ -166,6 +244,7 @@
   async function initialise() {
     try {
       const rows = await fetchStatus();
+
       renderServiceCards(rows);
       renderOverview(rows);
       renderHomepage(rows);
@@ -175,7 +254,10 @@
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initialise);
+    document.addEventListener(
+      "DOMContentLoaded",
+      initialise
+    );
   } else {
     initialise();
   }
