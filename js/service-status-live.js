@@ -95,7 +95,7 @@
               <div class="d-flex align-items-start justify-content-between gap-3 mb-3">
                 <div>
                   <span class="badge text-bg-${style.card} mb-2">${escapeHtml(row.homepage_label)}</span>
-                  <h2 class="h5 mb-1">${escapeHtml(row.service_group_name)}</h2>
+                  <h2 class="h7 mb-1">${escapeHtml(row.service_group_name)}</h2>
                 </div>
                 <i class="bi ${style.icon} fs-3 text-${style.card}" aria-hidden="true"></i>
               </div>
