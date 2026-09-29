@@ -2,7 +2,7 @@
   "use strict";
 
   const SUPABASE_URL = "https://lopkjhmahofslsyfxrxp.supabase.co";
-  const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_KBtZGWGCZxh5j34F-aaijQ_rAc0kA3K";
+  const SUPABASE_PUBLISHABLE_KEY = "PASTE_PUBLIC_PUBLISHABLE_KEY_HERE";
 
   const SERVICE_ORDER = ["TVL_NT", "TPE_MANCHESTER"];
 
@@ -95,11 +95,11 @@
               <div class="d-flex align-items-start justify-content-between gap-3 mb-3">
                 <div>
                   <span class="badge text-bg-${style.card} mb-2">${escapeHtml(row.homepage_label)}</span>
-                  <h2 class="h7 mb-1">${escapeHtml(row.service_group_name)}</h2>
+                  <h2 class="h4 mb-1">${escapeHtml(row.service_group_name)}</h2>
                 </div>
                 <i class="bi ${style.icon} fs-3 text-${style.card}" aria-hidden="true"></i>
               </div>
-              <h3 class="h6 text-${style.card}">${escapeHtml(status)}</h3>
+              <h3 class="h5 text-${style.card}">${escapeHtml(status)}</h3>
               <dl class="row mb-3">
                 <dt class="col-sm-3">Issue</dt>
                 <dd class="col-sm-9">${escapeHtml(row.issue_text || "No current issue reported.")}</dd>
