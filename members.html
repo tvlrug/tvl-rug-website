@@ -71,7 +71,9 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="service-status.html">Service Status</a>
+          <a class="nav-link" href="service-status.html">
+            Service Status
+          </a>
         </li>
 
         <li class="nav-item">
@@ -98,6 +100,7 @@
   </div>
 </nav>
 
+
 <header class="page-header">
   <div class="container">
 
@@ -110,6 +113,7 @@
 
   </div>
 </header>
+
 
 <main class="page-content">
 
@@ -152,6 +156,7 @@
 
       </div>
 
+
       <!-- Signed-in member panel -->
       <div class="card p-4 mb-4">
 
@@ -184,7 +189,7 @@
                     class="badge-news"
                     id="member-role"
                   >
-                    Member
+                    Loading role...
                   </span>
 
                 </div>
@@ -201,6 +206,7 @@
             </div>
 
           </div>
+
 
           <div class="col-lg-4">
 
@@ -221,6 +227,7 @@
                 </div>
 
               </div>
+
 
               <div class="col-6">
 
@@ -246,6 +253,7 @@
 
       </div>
 
+
       <!-- Member resource cards -->
       <div class="row g-4">
 
@@ -259,10 +267,12 @@
             </div>
 
             <div class="mb-2">
+
               <span class="badge-news">
                 <i class="bi bi-shield-check me-1"></i>
                 Secure member resource
               </span>
+
             </div>
 
             <h3 class="h5">
@@ -291,6 +301,7 @@
 
         </div>
 
+
         <!-- Minutes Archive -->
         <div class="col-md-6 col-xl-3">
 
@@ -301,10 +312,12 @@
             </div>
 
             <div class="mb-2">
+
               <span class="badge-news">
                 <i class="bi bi-shield-check me-1"></i>
                 Secure member resource
               </span>
+
             </div>
 
             <h3 class="h5">
@@ -333,6 +346,7 @@
 
         </div>
 
+
         <!-- Newsletters -->
         <div class="col-md-6 col-xl-3">
 
@@ -343,10 +357,12 @@
             </div>
 
             <div class="mb-2">
+
               <span class="badge-news">
                 <i class="bi bi-shield-check me-1"></i>
                 Secure member resource
               </span>
+
             </div>
 
             <h3 class="h5">
@@ -375,6 +391,7 @@
 
         </div>
 
+
         <!-- Member Briefings -->
         <div class="col-md-6 col-xl-3">
 
@@ -385,10 +402,12 @@
             </div>
 
             <div class="mb-2">
+
               <span class="badge-news">
                 <i class="bi bi-shield-check me-1"></i>
                 Secure member resource
               </span>
+
             </div>
 
             <h3 class="h5">
@@ -421,6 +440,7 @@
 
     </div>
   </section>
+
 
   <!-- Resource information -->
   <section class="section section-light">
@@ -465,6 +485,7 @@
 
         </div>
 
+
         <div class="col-lg-5">
 
           <div class="card p-4 h-100">
@@ -501,6 +522,7 @@
 
   </section>
 
+
   <!-- Help -->
   <section class="section">
 
@@ -523,6 +545,7 @@
 
           </div>
 
+
           <div class="col-lg-4 text-lg-end">
 
             <a
@@ -544,6 +567,7 @@
 
 </main>
 
+
 <footer class="footer">
 
   <div class="container">
@@ -553,6 +577,7 @@
       <div class="col-lg-4">
         © Powered by CraggleNett Solutions, 2026
       </div>
+
 
       <div class="col-lg-4 text-lg-center">
 
@@ -569,6 +594,7 @@
         <a href="contact.html">Contact</a>
 
       </div>
+
 
       <div class="col-lg-4 text-lg-end">
 
@@ -594,9 +620,11 @@
 
 </footer>
 
+
 <script
   src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
 </script>
+
 
 <script type="module">
 
@@ -606,7 +634,12 @@
     logout
   } from '/js/auth.js?v=2';
 
+
+  /*
+   * Confirm the user has an active Supabase session.
+   */
   const user = await getCurrentUser();
+
 
   if (!user) {
 
@@ -614,6 +647,19 @@
 
   } else {
 
+    const memberName =
+      document.getElementById('member-name');
+
+    const memberRole =
+      document.getElementById('member-role');
+
+    const memberEmail =
+      document.getElementById('member-email');
+
+
+    /*
+     * Load the signed-in member's profile.
+     */
     const {
       data: profile,
       error: profileError
@@ -621,15 +667,11 @@
       .from('member_profiles')
       .select(`
         display_name,
-        email,
-        member_user_roles (
-          member_roles (
-            role_name
-          )
-        )
+        email
       `)
       .eq('user_id', user.id)
       .single();
+
 
     if (profileError) {
 
@@ -638,72 +680,99 @@
         profileError
       );
 
-      const memberName =
-        document.getElementById('member-name');
-
-      const memberRole =
-        document.getElementById('member-role');
-
-      const memberEmail =
-        document.getElementById('member-email');
-
-      if (memberName) {
-        memberName.textContent = 'TVL-RUG Member';
-      }
-
-      if (memberRole) {
-        memberRole.textContent = 'Member';
-      }
-
-      if (memberEmail) {
-        memberEmail.textContent = user.email;
-      }
-
-    } else {
-
-      const memberName =
-        document.getElementById('member-name');
-
-      const memberRole =
-        document.getElementById('member-role');
-
-      const memberEmail =
-        document.getElementById('member-email');
-
       if (memberName) {
         memberName.textContent =
-          profile.display_name || 'TVL-RUG Member';
+          'TVL-RUG Member';
       }
 
       if (memberEmail) {
         memberEmail.textContent =
-          profile.email || user.email;
+          user.email;
       }
 
-      if (memberRole) {
+    } else {
 
-        const roles =
-          profile.member_user_roles
-            ?.map(item =>
-              item.member_roles?.role_name
-            )
-            .filter(Boolean);
+      if (memberName) {
+        memberName.textContent =
+          profile.display_name ||
+          'TVL-RUG Member';
+      }
+
+      if (memberEmail) {
+        memberEmail.textContent =
+          profile.email ||
+          user.email;
+      }
+
+    }
+
+
+    /*
+     * Load the member's assigned role(s).
+     */
+    const {
+      data: userRoles,
+      error: rolesError
+    } = await supabase
+      .from('member_user_roles')
+      .select(`
+        member_roles (
+          role_name
+        )
+      `)
+      .eq('user_id', user.id);
+
+
+    if (rolesError) {
+
+      console.error(
+        'Unable to load member roles:',
+        rolesError
+      );
+
+      if (memberRole) {
+        memberRole.textContent =
+          'Member';
+      }
+
+    } else {
+
+      const roles =
+        userRoles
+          ?.map(item =>
+            item.member_roles?.role_name
+          )
+          .filter(Boolean);
+
+
+      if (memberRole) {
 
         memberRole.textContent =
           roles?.length
             ? roles.join(' · ')
             : 'Member';
+
       }
 
     }
 
   }
 
+
+  /*
+   * Sign out.
+   */
   const logoutButton =
     document.getElementById('logout-button');
 
+
   if (logoutButton) {
-    logoutButton.addEventListener('click', logout);
+
+    logoutButton.addEventListener(
+      'click',
+      logout
+    );
+
   }
 
 </script>
