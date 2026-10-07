@@ -150,6 +150,85 @@
         </div>
       </div>
 
+      <div class="card p-4 mb-4">
+
+        <div class="row align-items-center g-4">
+
+          <div class="col-lg-8">
+
+            <div class="d-flex align-items-center">
+
+              <div class="feature-icon me-3">
+                <i class="bi bi-person-check-fill"></i>
+              </div>
+
+              <div>
+
+                <p class="text-muted mb-1">
+                  Signed in as
+                </p>
+
+                <h2
+                  class="h5 mb-1"
+                  id="member-email"
+                >
+                  Loading account...
+                </h2>
+
+                <p class="mb-0 text-muted">
+                  Your TVL-RUG member session is active.
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="col-lg-4">
+
+            <div class="row g-3 text-center">
+
+              <div class="col-6">
+
+                <div class="border rounded p-3 h-100">
+
+                  <div class="h3 mb-1">
+                    4
+                  </div>
+
+                  <div class="small text-muted">
+                    Member resources
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="col-6">
+
+                <div class="border rounded p-3 h-100">
+
+                  <div class="h3 mb-1">
+                    <i class="bi bi-shield-check"></i>
+                  </div>
+
+                  <div class="small text-muted">
+                    Secure access
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
       <div class="row g-4">
 
         <!-- Meeting Papers -->
@@ -496,6 +575,15 @@
 
   if (!user) {
     window.location.replace('/login.html');
+  } else {
+
+    const memberEmail =
+      document.getElementById('member-email');
+
+    if (memberEmail) {
+      memberEmail.textContent = user.email;
+    }
+
   }
 
   const logoutButton =
