@@ -116,7 +116,7 @@
   <section class="section">
     <div class="container">
 
-      <!-- Welcome -->
+      <!-- Welcome card -->
       <div class="card p-4 p-lg-5 mb-4">
 
         <div class="row align-items-center g-4">
@@ -149,9 +149,10 @@
           </div>
 
         </div>
+
       </div>
 
-      <!-- Signed-in member information -->
+      <!-- Signed-in member panel -->
       <div class="card p-4 mb-4">
 
         <div class="row align-items-center g-4">
@@ -167,18 +168,32 @@
               <div>
 
                 <p class="text-muted mb-1">
-                  Signed in as
+                  Welcome back
                 </p>
 
                 <h2
-                  class="h5 mb-1"
+                  class="h4 mb-2"
+                  id="member-name"
+                >
+                  Loading member...
+                </h2>
+
+                <div class="mb-2">
+
+                  <span
+                    class="badge-news"
+                    id="member-role"
+                  >
+                    Member
+                  </span>
+
+                </div>
+
+                <p
+                  class="mb-0 text-muted"
                   id="member-email"
                 >
                   Loading account...
-                </h2>
-
-                <p class="mb-0 text-muted">
-                  Your TVL-RUG member session is active.
                 </p>
 
               </div>
@@ -231,7 +246,7 @@
 
       </div>
 
-      <!-- Member resources -->
+      <!-- Member resource cards -->
       <div class="row g-4">
 
         <!-- Meeting Papers -->
@@ -586,6 +601,7 @@
 <script type="module">
 
   import {
+    supabase,
     getCurrentUser,
     logout
   } from '/js/auth.js?v=2';
@@ -598,11 +614,87 @@
 
   } else {
 
-    const memberEmail =
-      document.getElementById('member-email');
+    const {
+      data: profile,
+      error: profileError
+    } = await supabase
+      .from('member_profiles')
+      .select(`
+        display_name,
+        email,
+        member_user_roles (
+          member_roles (
+            role_name
+          )
+        )
+      `)
+      .eq('user_id', user.id)
+      .single();
 
-    if (memberEmail) {
-      memberEmail.textContent = user.email;
+    if (profileError) {
+
+      console.error(
+        'Unable to load member profile:',
+        profileError
+      );
+
+      const memberName =
+        document.getElementById('member-name');
+
+      const memberRole =
+        document.getElementById('member-role');
+
+      const memberEmail =
+        document.getElementById('member-email');
+
+      if (memberName) {
+        memberName.textContent = 'TVL-RUG Member';
+      }
+
+      if (memberRole) {
+        memberRole.textContent = 'Member';
+      }
+
+      if (memberEmail) {
+        memberEmail.textContent = user.email;
+      }
+
+    } else {
+
+      const memberName =
+        document.getElementById('member-name');
+
+      const memberRole =
+        document.getElementById('member-role');
+
+      const memberEmail =
+        document.getElementById('member-email');
+
+      if (memberName) {
+        memberName.textContent =
+          profile.display_name || 'TVL-RUG Member';
+      }
+
+      if (memberEmail) {
+        memberEmail.textContent =
+          profile.email || user.email;
+      }
+
+      if (memberRole) {
+
+        const roles =
+          profile.member_user_roles
+            ?.map(item =>
+              item.member_roles?.role_name
+            )
+            .filter(Boolean);
+
+        memberRole.textContent =
+          roles?.length
+            ? roles.join(' · ')
+            : 'Member';
+      }
+
     }
 
   }
