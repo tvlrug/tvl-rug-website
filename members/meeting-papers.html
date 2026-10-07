@@ -53,6 +53,7 @@
     <div class="collapse navbar-collapse" id="mainNav">
 
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
         <li class="nav-item">
           <a class="nav-link" href="../index.html">Home</a>
         </li>
@@ -80,6 +81,7 @@
         <li class="nav-item">
           <a class="nav-link" href="../contact.html">Contact</a>
         </li>
+
       </ul>
 
       <button
@@ -124,26 +126,143 @@
       <div class="card p-4 p-lg-5">
 
         <div class="d-flex align-items-center mb-4">
+
           <div class="feature-icon me-3">
             <i class="bi bi-folder2-open"></i>
           </div>
 
           <div>
-            <h2 class="h3 mb-1">Meeting documents</h2>
+
+            <h2 class="h3 mb-1">
+              Meeting Documents
+            </h2>
+
             <p class="mb-0 text-muted">
-              Approved member-access meeting papers will appear here.
+              Access agendas, reports and supporting documents
+              for TVL-RUG meetings.
             </p>
+
           </div>
+
         </div>
 
-        <div class="callout">
-          <strong>Document area ready</strong>
+        <div class="callout mb-4">
+
+          <strong>
+            TVL-RUG Document Library
+          </strong>
 
           <p class="mb-0 mt-2">
-            This page is protected by member authentication.
-            The next step will be connecting it to the approved
-            TVL-RUG document source.
+            Meeting papers are stored in the official TVL-RUG
+            SharePoint document library. SharePoint remains the
+            authoritative source for approved meeting documents.
           </p>
+
+        </div>
+
+        <div class="row g-4">
+
+          <div class="col-lg-8">
+
+            <div class="card p-4 h-100">
+
+              <div class="d-flex align-items-start">
+
+                <div class="feature-icon me-3">
+                  <i class="bi bi-folder-fill"></i>
+                </div>
+
+                <div>
+
+                  <h3 class="h5 mb-2">
+                    Agendas and Meeting Papers
+                  </h3>
+
+                  <p class="mb-3">
+                    Open the TVL-RUG SharePoint library to view
+                    agendas, reports, supporting papers and other
+                    approved meeting documentation.
+                  </p>
+
+                  <a
+                    href="https://netorgft20599545.sharepoint.com/:f:/s/tvl-rug/IgChKWB-ZeG7TpDllwRV0NhfAXgDPpOsBP-qaAo9njaxo5s?e=Ma98is"
+                    class="btn btn-tvl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i class="bi bi-box-arrow-up-right me-2"></i>
+                    Open Meeting Papers
+                  </a>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="col-lg-4">
+
+            <div class="card p-4 h-100">
+
+              <h3 class="h5 mb-3">
+                Access information
+              </h3>
+
+              <p>
+                Documents are opened from the TVL-RUG SharePoint
+                document library.
+              </p>
+
+              <p class="mb-0">
+                You may be asked to sign in with your authorised
+                Microsoft 365 account if SharePoint requires
+                additional verification.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="container">
+
+      <div class="callout">
+
+        <div class="row align-items-center g-3">
+
+          <div class="col-lg-8">
+
+            <h2 class="h4 mb-2">
+              Cannot find a meeting document?
+            </h2>
+
+            <p class="mb-0">
+              If a paper is missing or you believe you should have
+              access to additional material, contact TVL-RUG.
+            </p>
+
+          </div>
+
+          <div class="col-lg-4 text-lg-end">
+
+            <a
+              href="../contact.html"
+              class="btn btn-tvl"
+            >
+              Contact TVL-RUG
+            </a>
+
+          </div>
+
         </div>
 
       </div>
@@ -169,9 +288,11 @@
       </div>
 
       <div class="col-lg-4 text-lg-end">
+
         <a href="mailto:contact@tvl-rug.org.uk">
           contact@tvl-rug.org.uk
         </a>
+
       </div>
 
     </div>
@@ -184,6 +305,7 @@
 </script>
 
 <script type="module">
+
   import {
     requireAuth,
     logout
@@ -197,6 +319,7 @@
   if (logoutButton) {
     logoutButton.addEventListener('click', logout);
   }
+
 </script>
 
 </body>
