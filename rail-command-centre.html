@@ -55,22 +55,22 @@
       </div>
 
       <div class="command-system-card">
-        <span class="system-live"><i></i> Simulated live dashboard</span>
+        <span class="system-live" id="trsLiveState"><i></i> Loading RAPS data...</span>
         <h2>Operational snapshot</h2>
-        <p>This dashboard currently uses demonstration data while the TVL-RUG Data Hub is developed.</p>
+        <p id="trsSystemSummary">Connecting to the TVL-RUG RAPS live data feed...</p>
 
         <div class="system-mini-grid">
           <div>
-            <strong>4</strong>
-            <span>Route flows</span>
+            <strong id="miniServices">—</strong>
+            <span>Live services</span>
           </div>
           <div>
-            <strong>12</strong>
-            <span>Reports</span>
+            <strong id="miniOperators">—</strong>
+            <span>Operators</span>
           </div>
           <div>
-            <strong>3</strong>
-            <span>Alerts</span>
+            <strong id="miniAlerts">—</strong>
+            <span>Cancellations</span>
           </div>
         </div>
       </div>
@@ -80,8 +80,8 @@
 
 <div class="system-bar">
   <div>Control system: TVL-RUG TRS</div>
-  <div>Status: Phase One Operational</div>
-  <div>Refresh mode: Demo Data</div>
+  <div><span id="trsSystemStatus">Status: Connecting</span></div>
+  <div><span id="trsRefreshMode">Refresh mode: RAPS Live</span></div>
 </div>
 
 <main class="command-dashboard py-5">
@@ -93,33 +93,33 @@
         <h2>Route overview</h2>
       </div>
       <div class="last-updated">
-        Last updated: manual demonstration data
+        <span id="trsLastUpdated">Last updated: loading...</span>
       </div>
     </div>
 
     <section class="mock-dashboard-grid mb-4">
       <div class="mock-kpi good">
-        <span>On-time score</span>
-        <strong>84%</strong>
-        <small>Tees Valley local services today</small>
+        <span>Within 3 minutes</span>
+        <strong id="kpiWithin3">—</strong>
+        <small id="kpiWithin3Note">Across currently monitored services</small>
       </div>
 
       <div class="mock-kpi warning">
         <span>Average delay</span>
-        <strong>6.4m</strong>
-        <small>Across monitored services</small>
+        <strong id="kpiAverageDelay">—</strong>
+        <small>Across currently monitored services</small>
       </div>
 
       <div class="mock-kpi danger">
         <span>Cancellations</span>
-        <strong>3</strong>
-        <small>Known issues affecting route flows</small>
+        <strong id="kpiCancellations">—</strong>
+        <small id="kpiCancellationNote">Part + full cancellations in the live window</small>
       </div>
 
       <div class="mock-kpi info">
-        <span>Passenger reports</span>
-        <strong>12</strong>
-        <small>Submitted this week</small>
+        <span>Services monitored</span>
+        <strong id="kpiServices">—</strong>
+        <small>Currently relevant RAPS services</small>
       </div>
     </section>
 
@@ -137,9 +137,9 @@
       </div>
 
       <div class="dashboard-panel chart-panel">
-        <span class="dashboard-label">Passenger reports</span>
-        <h3>Issues by category</h3>
-        <canvas id="issueTypeChart"></canvas>
+        <span class="dashboard-label">Live feed</span>
+        <h3>Snapshot health</h3>
+        <canvas id="feedHealthChart"></canvas>
       </div>
 
       <div class="dashboard-panel chart-panel">
@@ -156,8 +156,8 @@
           <h3>Tees Valley Line operational watch</h3>
         </div>
 
-        <span class="live-indicator">
-          <span></span> Simulated live view
+        <span class="live-indicator" id="routeLiveIndicator">
+          <span></span> Route status integration next
         </span>
       </div>
 
@@ -329,15 +329,15 @@
       <div class="future-grid">
         <div>
           <strong>Phase 1</strong>
-          <span>Visual dashboard using demonstration data.</span>
+          <span>Visual dashboard shell and control-room styling.</span>
         </div>
         <div>
           <strong>Phase 2</strong>
-          <span>Manual JSON updates for service status and passenger themes.</span>
+          <span>Live RAPS snapshots published to Supabase and rendered with Chart.js.</span>
         </div>
         <div>
           <strong>Phase 3</strong>
-          <span>Automated rail data feeds, trend analysis and corridor reporting.</span>
+          <span>Station-level route intelligence, historical trends and corridor reporting.</span>
         </div>
       </div>
     </section>
@@ -353,7 +353,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="js/rail-command-centre.js"></script>
+<script src="js/rail-command-centre.js?v=2"></script>
 
 </body>
 </html>
