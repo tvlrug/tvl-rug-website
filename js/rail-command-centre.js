@@ -129,43 +129,6 @@
     Chart.defaults.borderColor = "rgba(255,255,255,0.08)";
     Chart.defaults.font.family =
       'Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
-
-    Chart.defaults.plugins.legend.labels.usePointStyle = true;
-    Chart.defaults.plugins.legend.labels.boxWidth = 10;
-    Chart.defaults.plugins.legend.labels.boxHeight = 10;
-    Chart.defaults.plugins.legend.labels.padding = 16;
-  }
-
-  const CHART_COLORS = {
-    blue: "#36a2eb",
-    blueFill: "rgba(54,162,235,0.28)",
-    green: "#46d17a",
-    greenFill: "rgba(70,209,122,0.32)",
-    amber: "#f3b633",
-    amberFill: "rgba(243,182,51,0.32)",
-    red: "#ef5f68",
-    redFill: "rgba(239,95,104,0.34)",
-    pink: "#ff6384",
-    orange: "#ff9f40",
-    yellow: "#ffcd56",
-    grey: "#667085",
-    greyLight: "#aab3c0"
-  };
-
-  function operatorColor(code, index) {
-    const map = {
-      NT: CHART_COLORS.blue,
-      TPE: CHART_COLORS.pink,
-      LNER: CHART_COLORS.orange,
-      GC: CHART_COLORS.yellow
-    };
-    return map[code] || [
-      CHART_COLORS.blue,
-      CHART_COLORS.pink,
-      CHART_COLORS.orange,
-      CHART_COLORS.yellow,
-      CHART_COLORS.greyLight
-    ][index % 5];
   }
 
   function destroyChart(name) {
@@ -221,15 +184,9 @@
         datasets: [{
           label: "Average delay (mins)",
           data: points.map((x) => x.averageDelayMinutes),
-          borderColor: CHART_COLORS.blue,
-          backgroundColor: CHART_COLORS.blueFill,
-          pointBackgroundColor: CHART_COLORS.blue,
-          pointBorderColor: CHART_COLORS.blue,
-          pointHoverRadius: 5,
-          borderWidth: 2.5,
           fill: true,
           tension: 0.35,
-          pointRadius: points.length > 18 ? 0 : 2
+          pointRadius: 2
         }]
       },
       options: {
@@ -239,25 +196,9 @@
           intersect: false,
           mode: "index"
         },
-        plugins: {
-          tooltip: {
-            callbacks: {
-              label: (context) =>
-                `Average delay: ${Number(context.raw ?? 0).toFixed(2)} min`
-            }
-          }
-        },
         scales: {
-          x: {
-            grid: {
-              color: "rgba(255,255,255,0.05)"
-            }
-          },
           y: {
             beginAtZero: true,
-            grid: {
-              color: "rgba(255,255,255,0.08)"
-            },
             title: {
               display: true,
               text: "Minutes"
@@ -283,36 +224,12 @@
       data: {
         labels: operators.map((x) => x.name || x.code),
         datasets: [{
-          data: operators.map((x) => x.services || 0),
-          backgroundColor: operators.map((x, index) =>
-            operatorColor(x.code, index)
-          ),
-          borderColor: "#20242b",
-          borderWidth: 2,
-          hoverOffset: 6
+          data: operators.map((x) => x.services || 0)
         }]
       },
       options: {
         responsive: true,
-        maintainAspectRatio: false,
-        cutout: "52%",
-        plugins: {
-          tooltip: {
-            callbacks: {
-              label: (context) => {
-                const value = Number(context.raw || 0);
-                const total = operators.reduce(
-                  (sum, item) => sum + Number(item.services || 0),
-                  0
-                );
-                const pct = total
-                  ? (100 * value / total).toFixed(1)
-                  : "0.0";
-                return `${context.label}: ${value} (${pct}%)`;
-              }
-            }
-          }
-        }
+        maintainAspectRatio: false
       }
     });
   }
@@ -334,48 +251,23 @@
         datasets: [
           {
             label: "Within 3 minutes",
-            data: operators.map((x) => x.within3 || 0),
-            backgroundColor: CHART_COLORS.green,
-            borderColor: CHART_COLORS.green,
-            borderWidth: 1,
-            borderRadius: 4
+            data: operators.map((x) => x.within3 || 0)
           },
           {
             label: "Delayed",
-            data: operators.map((x) => x.delayed || 0),
-            backgroundColor: CHART_COLORS.red,
-            borderColor: CHART_COLORS.red,
-            borderWidth: 1,
-            borderRadius: 4
+            data: operators.map((x) => x.delayed || 0)
           }
         ]
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        plugins: {
-          tooltip: {
-            callbacks: {
-              label: (context) =>
-                `${context.dataset.label}: ${Number(context.raw || 0)} service(s)`
-            }
-          }
-        },
         scales: {
-          x: {
-            stacked: false,
-            grid: {
-              display: false
-            }
-          },
+          x: { stacked: false },
           y: {
             beginAtZero: true,
-            grid: {
-              color: "rgba(255,255,255,0.08)"
-            },
             ticks: {
-              precision: 0,
-              stepSize: 1
+              precision: 0
             }
           }
         }
@@ -399,30 +291,83 @@
       data: {
         labels: ["Live timing available", "No current timing"],
         datasets: [{
-          data: [timed, noTiming],
-          backgroundColor: [
-            CHART_COLORS.green,
-            CHART_COLORS.grey
-          ],
-          borderColor: "#20242b",
-          borderWidth: 2,
-          hoverOffset: 6
+          data: [timed, noTiming]
         }]
       },
       options: {
         responsive: true,
-        maintainAspectRatio: false,
-        cutout: "52%",
-        plugins: {
-          tooltip: {
-            callbacks: {
-              label: (context) =>
-                `${context.label}: ${Number(context.raw || 0)} service(s)`
-            }
-          }
-        }
+        maintainAspectRatio: false
       }
     });
+  }
+
+
+  const ROUTE_STATIONS = [
+    { code: "SLB", id: "stationSaltburn" },
+    { code: "RCC", id: "stationRedcar" },
+    { code: "MBR", id: "stationMiddlesbrough" },
+    { code: "TBY", id: "stationThornaby" },
+    { code: "DAR", id: "stationDarlington" }
+  ];
+
+  const ROUTE_LINES = [
+    { from: "SLB", to: "RCC", id: "lineSaltburnRedcar" },
+    { from: "RCC", to: "MBR", id: "lineRedcarMiddlesbrough" },
+    { from: "MBR", to: "TBY", id: "lineMiddlesbroughThornaby" },
+    { from: "TBY", to: "DAR", id: "lineThornabyDarlington" }
+  ];
+
+  function routeStateClass(state) {
+    switch (state) {
+      case "NORMAL": return "trs-normal";
+      case "MONITORING": return "trs-monitoring";
+      case "DISRUPTION": return "trs-disruption";
+      default: return "trs-unavailable";
+    }
+  }
+
+  function applyRouteState(element, state) {
+    if (!element) return;
+    element.classList.remove("active","warning","hotspot","pulse","trs-normal","trs-monitoring","trs-disruption","trs-unavailable");
+    element.classList.add(routeStateClass(state));
+    if (element.classList.contains("station")) element.classList.add("trs-pulse");
+  }
+
+  function renderRoute(payload) {
+    const route = Array.isArray(payload.route) ? payload.route : [];
+    const routeByCode = new Map(route.map((item) => [item.code, item]));
+
+    ROUTE_STATIONS.forEach((station) => {
+      const element = byId(station.id);
+      const item = routeByCode.get(station.code);
+      applyRouteState(element, item?.state || "UNAVAILABLE");
+      if (element && item) {
+        const groups = Array.isArray(item.serviceGroups) ? item.serviceGroups.join(", ") : "";
+        element.title = `${item.name}: ${item.statusLabel || item.state}` + (groups ? ` | ${groups}` : "");
+      }
+    });
+
+    ROUTE_LINES.forEach((line) => {
+      const element = byId(line.id);
+      const from = routeByCode.get(line.from);
+      const to = routeByCode.get(line.to);
+      let state = "UNAVAILABLE";
+      if (from && to) {
+        if (from.state === "UNAVAILABLE" || to.state === "UNAVAILABLE") {
+          state = "UNAVAILABLE";
+        } else {
+          const severity = Math.max(Number(from.severity ?? 9), Number(to.severity ?? 9));
+          state = severity <= 0 ? "NORMAL" : severity === 1 ? "MONITORING" : "DISRUPTION";
+        }
+      }
+      applyRouteState(element, state);
+    });
+
+    const indicator = byId("routeLiveIndicator");
+    if (indicator) {
+      const unavailable = !route.length || route.some((item) => item.state === "UNAVAILABLE");
+      indicator.innerHTML = unavailable ? "<span></span> RAPS route data delayed" : "<span></span> Live RAPS route view";
+    }
   }
 
   function renderSnapshot(row) {
@@ -502,6 +447,7 @@
     renderOperatorSplit(payload);
     renderPunctuality(payload);
     renderFeedHealth(payload);
+    renderRoute(payload);
   }
 
   function renderError(error) {
