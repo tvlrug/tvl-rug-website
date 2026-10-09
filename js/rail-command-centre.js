@@ -910,6 +910,242 @@
     });
   }
 
+
+  function plannedSeverityRank(severity) {
+    switch (severity) {
+      case "DISRUPTION": return 2;
+      case "MONITORING": return 1;
+      default: return 0;
+    }
+  }
+
+  function plannedSeverityPresentation(severity) {
+    switch (severity) {
+      case "DISRUPTION":
+        return { css: "red", label: "Disruption" };
+      case "MONITORING":
+        return { css: "amber", label: "Monitoring" };
+      default:
+        return { css: "grey", label: "Advisory" };
+    }
+  }
+
+  function formatPlannedDateRange(startValue, endValue) {
+    const start = new Date(startValue);
+    const end = new Date(endValue);
+
+    const dateFmt = new Intl.DateTimeFormat("en-GB", {
+      weekday: "short",
+      day: "2-digit",
+      month: "short"
+    });
+
+    const timeFmt = new Intl.DateTimeFormat("en-GB", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false
+    });
+
+    const sameDay =
+      start.getFullYear() === end.getFullYear() &&
+      start.getMonth() === end.getMonth() &&
+      start.getDate() === end.getDate();
+
+    if (sameDay) {
+      return `${dateFmt.format(start)}, ${timeFmt.format(start)}–${timeFmt.format(end)}`;
+    }
+
+    return `${dateFmt.format(start)}, ${timeFmt.format(start)} – ${dateFmt.format(end)}, ${timeFmt.format(end)}`;
+  }
+
+  async function fetchPlannedDisruption() {
+    const url =
+      `${SUPABASE_URL}/rest/v1/planned_disruption` +
+      `?select=planned_disruption_id,title,start_utc,end_utc,affected_route,severity,passenger_message,source_name,source_url,is_active` +
+      `&is_active=eq.true&order=start_utc.asc`;
+
+    const response = await fetch(url, {
+      headers: {
+        apikey: SUPABASE_PUBLISHABLE_KEY,
+        Authorization: `Bearer ${SUPABASE_PUBLISHABLE_KEY}`
+      },
+      cache: "no-store"
+    });
+
+    if (!response.ok) {
+      const body = await response.text();
+      throw new Error(
+        `Planned disruption feed failed (${response.status}): ${body}`
+      );
+    }
+
+    return await response.json();
+  }
+
+  function renderPlannedDisruption(rows) {
+    const now = new Date();
+    const upcomingCutoff = new Date(
+      now.getTime() + (7 * 24 * 60 * 60 * 1000)
+    );
+
+    const relevant = (Array.isArray(rows) ? rows : [])
+      .filter((item) => {
+        const end = new Date(item.end_utc);
+        const start = new Date(item.start_utc);
+        return end >= now && start <= upcomingCutoff;
+      })
+      .sort((a, b) => {
+        const severityDiff =
+          plannedSeverityRank(b.severity) -
+          plannedSeverityRank(a.severity);
+
+        if (severityDiff !== 0) return severityDiff;
+        return new Date(a.start_utc) - new Date(b.start_utc);
+      });
+
+    const active = relevant.filter((item) => {
+      const start = new Date(item.start_utc);
+      const end = new Date(item.end_utc);
+      return start <= now && now <= end;
+    });
+
+    let headline;
+    let cardText;
+    let cardPresentation;
+
+    if (active.length) {
+      const worst = active.reduce((current, item) =>
+        plannedSeverityRank(item.severity) >
+        plannedSeverityRank(current.severity)
+          ? item
+          : current
+      );
+
+      cardPresentation =
+        plannedSeverityPresentation(worst.severity);
+
+      headline =
+        worst.severity === "DISRUPTION"
+          ? "Engineering disruption"
+          : "Engineering works";
+
+      cardText =
+        `${active.length} active planned work item${active.length === 1 ? "" : "s"} affecting monitored travel.`;
+    } else if (relevant.length) {
+      const next = relevant
+        .slice()
+        .sort((a, b) =>
+          new Date(a.start_utc) - new Date(b.start_utc)
+        )[0];
+
+      cardPresentation = {
+        css: "amber",
+        label: "Upcoming"
+      };
+
+      headline = "Works upcoming";
+      cardText =
+        `${next.title} — ${formatPlannedDateRange(next.start_utc, next.end_utc)}.`;
+    } else {
+      cardPresentation = {
+        css: "green",
+        label: "No major works"
+      };
+
+      headline = "No major works";
+      cardText =
+        "No active or upcoming planned disruption is published for the next 7 days.";
+    }
+
+    setText("engineeringLiveTitle", headline);
+    setText("engineeringLiveText", cardText);
+    setStatusPill(
+      "engineeringLivePill",
+      cardPresentation.css,
+      cardPresentation.label
+    );
+
+    const summary = byId("engineeringWorksSummary");
+    const list = byId("engineeringWorksList");
+
+    if (!summary || !list) return;
+
+    if (!relevant.length) {
+      summary.textContent =
+        "No active or upcoming planned disruption is published for the next 7 days.";
+
+      list.innerHTML =
+        '<div class="engineering-live-item">' +
+        '<strong>No major planned works currently listed</strong>' +
+        '<p>The dashboard will show published engineering disruption here when available.</p>' +
+        '</div>';
+
+      return;
+    }
+
+    summary.textContent =
+      `${relevant.length} planned work item${relevant.length === 1 ? "" : "s"} currently active or due within the next 7 days.`;
+
+    list.innerHTML = "";
+
+    relevant.slice(0, 3).forEach((item) => {
+      const block = document.createElement("div");
+      block.className = "engineering-live-item";
+
+      const severity =
+        plannedSeverityPresentation(item.severity);
+
+      const title = document.createElement("strong");
+      title.textContent = item.title;
+
+      const meta = document.createElement("span");
+      meta.className = "engineering-live-meta";
+      meta.textContent =
+        `${formatPlannedDateRange(item.start_utc, item.end_utc)} · ` +
+        `${item.affected_route} · ${severity.label}`;
+
+      const message = document.createElement("p");
+      message.textContent = item.passenger_message;
+
+      block.appendChild(title);
+      block.appendChild(meta);
+      block.appendChild(message);
+
+      list.appendChild(block);
+    });
+  }
+
+  async function loadPlannedDisruption() {
+    try {
+      const rows = await fetchPlannedDisruption();
+      renderPlannedDisruption(rows);
+    } catch (error) {
+      console.error("TRS planned disruption load failed:", error);
+
+      setText("engineeringLiveTitle", "Planned works unavailable");
+      setText(
+        "engineeringLiveText",
+        "The planned disruption feed could not be loaded."
+      );
+      setStatusPill(
+        "engineeringLivePill",
+        "grey",
+        "Unavailable"
+      );
+
+      setText(
+        "engineeringWorksSummary",
+        "Planned engineering information is temporarily unavailable."
+      );
+
+      const list = byId("engineeringWorksList");
+      if (list) {
+        list.innerHTML =
+          '<div class="notice-box">Please check operator and National Rail journey planners.</div>';
+      }
+    }
+  }
+
   function renderSnapshot(row) {
     const payload = row.payload || {};
     const summary = payload.summary || {};
@@ -1050,5 +1286,7 @@
 
   chartDefaults();
   refresh();
+  loadPlannedDisruption();
   window.setInterval(refresh, REFRESH_MS);
+  window.setInterval(loadPlannedDisruption, 15 * 60 * 1000);
 })();
