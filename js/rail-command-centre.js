@@ -493,6 +493,236 @@
     }
   }
 
+
+  function setStatusPill(id, cssClass, label) {
+    const el = byId(id);
+    if (!el) return;
+
+    el.classList.remove("green", "amber", "red", "grey");
+    el.classList.add(cssClass);
+    el.textContent = label;
+  }
+
+  function operatorOperationalState(operator) {
+    if (!operator) {
+      return {
+        css: "grey",
+        label: "Unavailable",
+        title: "Live data unavailable",
+        text: "No current RAPS operator data is available."
+      };
+    }
+
+    const services = Number(operator.services || 0);
+    const delayed = Number(operator.delayed || 0);
+    const cancellations = Number(operator.cancellations || 0);
+
+    if (services === 0) {
+      return {
+        css: "grey",
+        label: "No current services",
+        title: "No current services",
+        text: "No monitored services are currently within the live window."
+      };
+    }
+
+    if (cancellations > 0) {
+      return {
+        css: "red",
+        label: cancellations === 1 ? "1 cancellation" : `${cancellations} cancellations`,
+        title: "Service disruption",
+        text:
+          `${cancellations} cancellation${cancellations === 1 ? "" : "s"} ` +
+          `and ${delayed} delayed service${delayed === 1 ? "" : "s"} ` +
+          `across ${services} currently monitored service${services === 1 ? "" : "s"}.`
+      };
+    }
+
+    if (delayed > 0) {
+      return {
+        css: "amber",
+        label: "Monitoring",
+        title: "Delays being monitored",
+        text:
+          `${delayed} of ${services} currently monitored service${services === 1 ? "" : "s"} ` +
+          `${delayed === 1 ? "is" : "are"} outside 3 minutes.`
+      };
+    }
+
+    return {
+      css: "green",
+      label: "Good service",
+      title: "Good service",
+      text:
+        `${services} currently monitored service${services === 1 ? "" : "s"} ` +
+        `with no live delay or cancellation alert.`
+    };
+  }
+
+  function routeOperationalState(item, defaultName = "Route") {
+    if (!item || item.state === "UNAVAILABLE") {
+      return {
+        css: "grey",
+        label: "Unavailable",
+        title: "Live data unavailable",
+        text: `${defaultName} live route data is currently unavailable.`
+      };
+    }
+
+    if (item.state === "DISRUPTION") {
+      return {
+        css: "red",
+        label: "Disruption",
+        title: "Disruption affecting route",
+        text: item.statusLabel || `${defaultName} is currently affected by disruption.`
+      };
+    }
+
+    if (item.state === "MONITORING") {
+      return {
+        css: "amber",
+        label: "Monitoring",
+        title: "Route being monitored",
+        text: item.statusLabel || `${defaultName} currently requires monitoring.`
+      };
+    }
+
+    return {
+      css: "green",
+      label: "Normal",
+      title: "Normal",
+      text: item.statusLabel || `${defaultName} is operating normally.`
+    };
+  }
+
+  function renderOperationalCards(payload) {
+    const operators = Array.isArray(payload.operators)
+      ? payload.operators
+      : [];
+
+    const route = Array.isArray(payload.route)
+      ? payload.route
+      : [];
+
+    const operatorByCode = new Map(
+      operators.map((item) => [item.code, item])
+    );
+
+    const routeByCode = new Map(
+      route.map((item) => [item.code, item])
+    );
+
+    const northern = operatorOperationalState(
+      operatorByCode.get("NT")
+    );
+
+    const tpe = operatorOperationalState(
+      operatorByCode.get("TPE")
+    );
+
+    const darlington = routeOperationalState(
+      routeByCode.get("DAR"),
+      "Darlington"
+    );
+
+    setText("northernLiveTitle", northern.title);
+    setText("northernLiveText", northern.text);
+    setStatusPill("northernLivePill", northern.css, northern.label);
+
+    setText("tpeLiveTitle", tpe.title);
+    setText("tpeLiveText", tpe.text);
+    setStatusPill("tpeLivePill", tpe.css, tpe.label);
+
+    setText("connectionsLiveTitle", darlington.title);
+    setText("connectionsLiveText", darlington.text);
+    setStatusPill(
+      "connectionsLivePill",
+      darlington.css,
+      darlington.label
+    );
+
+    setText(
+      "boardNorthernText",
+      northern.text
+    );
+    setStatusPill(
+      "boardNorthernPill",
+      northern.css,
+      northern.label
+    );
+
+    setText(
+      "boardTpeText",
+      tpe.text
+    );
+    setStatusPill(
+      "boardTpePill",
+      tpe.css,
+      tpe.label
+    );
+
+    setText(
+      "boardConnectionsText",
+      darlington.text
+    );
+    setStatusPill(
+      "boardConnectionsPill",
+      darlington.css,
+      darlington.label
+    );
+
+    const usableRoute = route.filter(
+      (item) => item.state !== "UNAVAILABLE"
+    );
+
+    let corridor;
+
+    if (!usableRoute.length) {
+      corridor = {
+        css: "grey",
+        label: "Unavailable",
+        text: "Live route intelligence is currently unavailable."
+      };
+    } else {
+      const worst = Math.max(
+        ...usableRoute.map((item) => Number(item.severity || 0))
+      );
+
+      const affected = usableRoute.filter(
+        (item) => Number(item.severity || 0) === worst
+      );
+
+      const names = affected.map((item) => item.name).join(", ");
+
+      if (worst >= 2) {
+        corridor = {
+          css: "red",
+          label: "Disruption",
+          text: `Highest live route severity is disruption at ${names}.`
+        };
+      } else if (worst === 1) {
+        corridor = {
+          css: "amber",
+          label: "Monitoring",
+          text: `Live route monitoring is currently focused on ${names}.`
+        };
+      } else {
+        corridor = {
+          css: "green",
+          label: "Normal",
+          text: "No live route section is currently showing a RAPS disruption alert."
+        };
+      }
+    }
+
+    setText("boardCorridorText", corridor.text);
+    setStatusPill(
+      "boardCorridorPill",
+      corridor.css,
+      corridor.label
+    );
+  }
+
   function renderSnapshot(row) {
     const payload = row.payload || {};
     const summary = payload.summary || {};
@@ -571,6 +801,7 @@
     renderPunctuality(payload);
     renderFeedHealth(payload);
     renderRoute(payload);
+    renderOperationalCards(payload);
   }
 
   function renderError(error) {
@@ -583,6 +814,29 @@
     );
     setText("trsSystemStatus", "Status: Data unavailable");
     setText("trsLastUpdated", "Last updated: unavailable");
+
+    [
+      ["northernLiveTitle", "Live data unavailable"],
+      ["northernLiveText", "Northern live status could not be loaded."],
+      ["tpeLiveTitle", "Live data unavailable"],
+      ["tpeLiveText", "TPE live status could not be loaded."],
+      ["connectionsLiveTitle", "Live data unavailable"],
+      ["connectionsLiveText", "Darlington live route status could not be loaded."],
+      ["boardNorthernText", "Live data unavailable."],
+      ["boardTpeText", "Live data unavailable."],
+      ["boardConnectionsText", "Live data unavailable."],
+      ["boardCorridorText", "Live route intelligence unavailable."]
+    ].forEach(([id, value]) => setText(id, value));
+
+    [
+      "northernLivePill",
+      "tpeLivePill",
+      "connectionsLivePill",
+      "boardNorthernPill",
+      "boardTpePill",
+      "boardConnectionsPill",
+      "boardCorridorPill"
+    ].forEach((id) => setStatusPill(id, "grey", "Unavailable"));
   }
 
   async function refresh() {
