@@ -11,8 +11,8 @@
     - NEVER place the secret/service_role key in browser JavaScript.
   */
 
-  const SUPABASE_URL = "https://lkmslxzqfhkyzununlow.supabase.co";
-  const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_nVKIKH6qMxq23CCZG15RBg_5_iNtxzf";
+  const SUPABASE_URL = "https://kmslxzqfhkyzununlow.supabase.co";
+  const SUPABASE_PUBLISHABLE_KEY = "PASTE_PUBLIC_PUBLISHABLE_KEY_HERE";
 
   const REFRESH_MS = 60_000;
   const HISTORY_ROWS = 180;
@@ -129,6 +129,43 @@
     Chart.defaults.borderColor = "rgba(255,255,255,0.08)";
     Chart.defaults.font.family =
       'Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+
+    Chart.defaults.plugins.legend.labels.usePointStyle = true;
+    Chart.defaults.plugins.legend.labels.boxWidth = 10;
+    Chart.defaults.plugins.legend.labels.boxHeight = 10;
+    Chart.defaults.plugins.legend.labels.padding = 16;
+  }
+
+  const CHART_COLORS = {
+    blue: "#36a2eb",
+    blueFill: "rgba(54,162,235,0.28)",
+    green: "#46d17a",
+    greenFill: "rgba(70,209,122,0.32)",
+    amber: "#f3b633",
+    amberFill: "rgba(243,182,51,0.32)",
+    red: "#ef5f68",
+    redFill: "rgba(239,95,104,0.34)",
+    pink: "#ff6384",
+    orange: "#ff9f40",
+    yellow: "#ffcd56",
+    grey: "#667085",
+    greyLight: "#aab3c0"
+  };
+
+  function operatorColor(code, index) {
+    const map = {
+      NT: CHART_COLORS.blue,
+      TPE: CHART_COLORS.pink,
+      LNER: CHART_COLORS.orange,
+      GC: CHART_COLORS.yellow
+    };
+    return map[code] || [
+      CHART_COLORS.blue,
+      CHART_COLORS.pink,
+      CHART_COLORS.orange,
+      CHART_COLORS.yellow,
+      CHART_COLORS.greyLight
+    ][index % 5];
   }
 
   function destroyChart(name) {
@@ -184,9 +221,15 @@
         datasets: [{
           label: "Average delay (mins)",
           data: points.map((x) => x.averageDelayMinutes),
+          borderColor: CHART_COLORS.blue,
+          backgroundColor: CHART_COLORS.blueFill,
+          pointBackgroundColor: CHART_COLORS.blue,
+          pointBorderColor: CHART_COLORS.blue,
+          pointHoverRadius: 5,
+          borderWidth: 2.5,
           fill: true,
           tension: 0.35,
-          pointRadius: 2
+          pointRadius: points.length > 18 ? 0 : 2
         }]
       },
       options: {
@@ -196,9 +239,25 @@
           intersect: false,
           mode: "index"
         },
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: (context) =>
+                `Average delay: ${Number(context.raw ?? 0).toFixed(2)} min`
+            }
+          }
+        },
         scales: {
+          x: {
+            grid: {
+              color: "rgba(255,255,255,0.05)"
+            }
+          },
           y: {
             beginAtZero: true,
+            grid: {
+              color: "rgba(255,255,255,0.08)"
+            },
             title: {
               display: true,
               text: "Minutes"
@@ -224,12 +283,36 @@
       data: {
         labels: operators.map((x) => x.name || x.code),
         datasets: [{
-          data: operators.map((x) => x.services || 0)
+          data: operators.map((x) => x.services || 0),
+          backgroundColor: operators.map((x, index) =>
+            operatorColor(x.code, index)
+          ),
+          borderColor: "#20242b",
+          borderWidth: 2,
+          hoverOffset: 6
         }]
       },
       options: {
         responsive: true,
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
+        cutout: "52%",
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: (context) => {
+                const value = Number(context.raw || 0);
+                const total = operators.reduce(
+                  (sum, item) => sum + Number(item.services || 0),
+                  0
+                );
+                const pct = total
+                  ? (100 * value / total).toFixed(1)
+                  : "0.0";
+                return `${context.label}: ${value} (${pct}%)`;
+              }
+            }
+          }
+        }
       }
     });
   }
@@ -251,23 +334,48 @@
         datasets: [
           {
             label: "Within 3 minutes",
-            data: operators.map((x) => x.within3 || 0)
+            data: operators.map((x) => x.within3 || 0),
+            backgroundColor: CHART_COLORS.green,
+            borderColor: CHART_COLORS.green,
+            borderWidth: 1,
+            borderRadius: 4
           },
           {
             label: "Delayed",
-            data: operators.map((x) => x.delayed || 0)
+            data: operators.map((x) => x.delayed || 0),
+            backgroundColor: CHART_COLORS.red,
+            borderColor: CHART_COLORS.red,
+            borderWidth: 1,
+            borderRadius: 4
           }
         ]
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: (context) =>
+                `${context.dataset.label}: ${Number(context.raw || 0)} service(s)`
+            }
+          }
+        },
         scales: {
-          x: { stacked: false },
+          x: {
+            stacked: false,
+            grid: {
+              display: false
+            }
+          },
           y: {
             beginAtZero: true,
+            grid: {
+              color: "rgba(255,255,255,0.08)"
+            },
             ticks: {
-              precision: 0
+              precision: 0,
+              stepSize: 1
             }
           }
         }
@@ -291,12 +399,28 @@
       data: {
         labels: ["Live timing available", "No current timing"],
         datasets: [{
-          data: [timed, noTiming]
+          data: [timed, noTiming],
+          backgroundColor: [
+            CHART_COLORS.green,
+            CHART_COLORS.grey
+          ],
+          borderColor: "#20242b",
+          borderWidth: 2,
+          hoverOffset: 6
         }]
       },
       options: {
         responsive: true,
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
+        cutout: "52%",
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: (context) =>
+                `${context.label}: ${Number(context.raw || 0)} service(s)`
+            }
+          }
+        }
       }
     });
   }
