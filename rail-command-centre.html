@@ -171,6 +171,49 @@
     }
   </style>
 
+
+  <style>
+    #trsCurrentThemes {
+      margin-bottom: 0;
+    }
+
+    #trsCurrentThemes li {
+      margin-bottom: .55rem;
+    }
+
+    #trsCurrentThemes li:last-child {
+      margin-bottom: 0;
+    }
+
+    #trsCurrentThemes .theme-severity {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      margin-right: .45rem;
+      vertical-align: .08em;
+    }
+
+    #trsCurrentThemes .theme-severity.green {
+      background: #46d17a;
+      box-shadow: 0 0 8px rgba(70, 209, 122, .6);
+    }
+
+    #trsCurrentThemes .theme-severity.amber {
+      background: #f3b633;
+      box-shadow: 0 0 8px rgba(243, 182, 51, .6);
+    }
+
+    #trsCurrentThemes .theme-severity.red {
+      background: #ef5f68;
+      box-shadow: 0 0 8px rgba(239, 95, 104, .6);
+    }
+
+    #trsCurrentThemes .theme-severity.grey {
+      background: #667085;
+    }
+  </style>
+
 </head>
 
 <body class="command-page">
@@ -454,11 +497,8 @@
           <span class="dashboard-label">Passenger Voice</span>
           <h3>Current themes</h3>
 
-          <ul class="theme-list">
-            <li>Darlington connection reliability</li>
-            <li>Redcar / Saltburn service patterns</li>
-            <li>Evening and weekend disruption</li>
-            <li>Accessibility and station facilities</li>
+          <ul class="theme-list" id="trsCurrentThemes">
+            <li>Loading current passenger-facing themes...</li>
           </ul>
 
           <a href="contact.html" class="btn btn-tvl w-100 mt-3">Report an issue</a>
@@ -534,7 +574,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="js/rail-command-centre.js?v=8"></script>
+<script src="js/rail-command-centre.js?v=9"></script>
 
 </body>
 </html>
