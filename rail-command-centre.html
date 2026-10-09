@@ -13,7 +13,7 @@
   <style>
     /* ============================================================
        TRS live route map
-       The line and station dots share the same fixed centreline.
+       Explicit marker row + station-name row.
        ============================================================ */
 
     .route-map {
@@ -21,59 +21,81 @@
       align-items: flex-start !important;
       width: 100%;
       gap: 0 !important;
-      padding-top: 10px;
+      padding: 8px 0 0;
     }
 
     .route-map .station {
       position: relative !important;
-      flex: 0 0 auto;
-      min-width: 72px;
-      padding-top: 24px !important;
-      text-align: center;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      flex: 0 0 92px !important;
+      min-width: 92px !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      text-align: center !important;
       line-height: 1.15;
       z-index: 2;
     }
 
-    .route-map .station::before {
-      content: "" !important;
-      position: absolute !important;
+    /* Disable any older marker pseudo-element from css/styles.css. */
+    .route-map .station::before,
+    .route-map .station::after {
+      content: none !important;
+      display: none !important;
+    }
+
+    .route-map .station-dot {
+      display: block !important;
       width: 12px !important;
       height: 12px !important;
+      min-width: 12px !important;
+      min-height: 12px !important;
       border-radius: 50% !important;
-      top: 3px !important;
-      left: 50% !important;
-      transform: translateX(-50%) !important;
-      margin: 0 !important;
+      margin: 0 0 8px 0 !important;
+      position: relative !important;
       z-index: 3;
     }
 
+    .route-map .station-name {
+      display: block !important;
+      width: 100%;
+      white-space: nowrap;
+      font-size: inherit;
+      line-height: 1.15;
+    }
+
+    /* Connector centre = marker centre: 6px from top. */
     .route-map .line {
+      display: block !important;
       position: relative !important;
       flex: 1 1 auto !important;
       min-width: 34px;
       height: 4px !important;
-      margin: 7px 0 0 0 !important;
-      align-self: flex-start !important;
+      margin: 4px 0 0 0 !important;
+      padding: 0 !important;
       border-radius: 999px;
+      align-self: flex-start !important;
       z-index: 1;
     }
 
-    .route-map .station.trs-normal::before {
+    .route-map .station.trs-normal .station-dot {
       background: #46d17a !important;
       box-shadow: 0 0 12px rgba(70, 209, 122, .95);
     }
 
-    .route-map .station.trs-monitoring::before {
+    .route-map .station.trs-monitoring .station-dot {
       background: #f3b633 !important;
       box-shadow: 0 0 14px rgba(243, 182, 51, .95);
     }
 
-    .route-map .station.trs-disruption::before {
+    .route-map .station.trs-disruption .station-dot {
       background: #ef5f68 !important;
       box-shadow: 0 0 16px rgba(239, 95, 104, .98);
     }
 
-    .route-map .station.trs-unavailable::before {
+    .route-map .station.trs-unavailable .station-dot {
       background: #667085 !important;
       box-shadow: 0 0 10px rgba(102, 112, 133, .75);
     }
@@ -96,19 +118,19 @@
       100% { box-shadow: 0 0 0 0 rgba(239, 95, 104, 0), 0 0 16px rgba(239, 95, 104, .98); }
     }
 
-    .route-map .station.trs-pulse.trs-normal::before {
+    .route-map .station.trs-pulse.trs-normal .station-dot {
       animation: trsStationPulseNormal 2.2s infinite;
     }
 
-    .route-map .station.trs-pulse.trs-monitoring::before {
+    .route-map .station.trs-pulse.trs-monitoring .station-dot {
       animation: trsStationPulseMonitoring 1.65s infinite;
     }
 
-    .route-map .station.trs-pulse.trs-disruption::before {
+    .route-map .station.trs-pulse.trs-disruption .station-dot {
       animation: trsStationPulseDisruption 1.1s infinite;
     }
 
-    .route-map .station.trs-pulse.trs-unavailable::before {
+    .route-map .station.trs-pulse.trs-unavailable .station-dot {
       animation: none;
     }
 
@@ -139,11 +161,12 @@
       }
 
       .route-map .station {
-        min-width: 82px;
+        flex-basis: 96px !important;
+        min-width: 96px !important;
       }
 
       .route-map .line {
-        min-width: 46px;
+        min-width: 42px;
       }
     }
   </style>
@@ -301,19 +324,38 @@
       </div>
 
       <div class="route-map" id="trsRouteMap">
-        <div id="stationSaltburn" class="station terminus trs-pulse trs-unavailable">Saltburn</div>
+        <div id="stationSaltburn" class="station terminus trs-pulse trs-unavailable">
+          <span class="station-dot" aria-hidden="true"></span>
+          <span class="station-name">Saltburn</span>
+        </div>
+
         <div id="lineSaltburnRedcar" class="line trs-unavailable"></div>
 
-        <div id="stationRedcar" class="station trs-pulse trs-unavailable">Redcar Central</div>
+        <div id="stationRedcar" class="station trs-pulse trs-unavailable">
+          <span class="station-dot" aria-hidden="true"></span>
+          <span class="station-name">Redcar Central</span>
+        </div>
+
         <div id="lineRedcarMiddlesbrough" class="line trs-unavailable"></div>
 
-        <div id="stationMiddlesbrough" class="station trs-pulse trs-unavailable">Middlesbrough</div>
+        <div id="stationMiddlesbrough" class="station trs-pulse trs-unavailable">
+          <span class="station-dot" aria-hidden="true"></span>
+          <span class="station-name">Middlesbrough</span>
+        </div>
+
         <div id="lineMiddlesbroughThornaby" class="line trs-unavailable"></div>
 
-        <div id="stationThornaby" class="station trs-pulse trs-unavailable">Thornaby</div>
+        <div id="stationThornaby" class="station trs-pulse trs-unavailable">
+          <span class="station-dot" aria-hidden="true"></span>
+          <span class="station-name">Thornaby</span>
+        </div>
+
         <div id="lineThornabyDarlington" class="line trs-unavailable"></div>
 
-        <div id="stationDarlington" class="station terminus trs-pulse trs-unavailable">Darlington</div>
+        <div id="stationDarlington" class="station terminus trs-pulse trs-unavailable">
+          <span class="station-dot" aria-hidden="true"></span>
+          <span class="station-name">Darlington</span>
+        </div>
       </div>
 
       <div class="map-legend">
@@ -492,7 +534,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="js/rail-command-centre.js?v=6"></script>
+<script src="js/rail-command-centre.js?v=7"></script>
 
 </body>
 </html>
