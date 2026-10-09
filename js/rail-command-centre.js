@@ -723,6 +723,193 @@
     );
   }
 
+
+  function themeItem(text, severity = "grey") {
+    return { text, severity };
+  }
+
+  function renderCurrentThemes(payload) {
+    const container = byId("trsCurrentThemes");
+    if (!container) return;
+
+    const operators = Array.isArray(payload.operators)
+      ? payload.operators
+      : [];
+
+    const route = Array.isArray(payload.route)
+      ? payload.route
+      : [];
+
+    const operatorByCode = new Map(
+      operators.map((item) => [item.code, item])
+    );
+
+    const routeByCode = new Map(
+      route.map((item) => [item.code, item])
+    );
+
+    const nt = operatorByCode.get("NT");
+    const tpe = operatorByCode.get("TPE");
+
+    const themes = [];
+
+    // 1. TPE disruption / delay theme.
+    if (tpe) {
+      const cancellations = Number(tpe.cancellations || 0);
+      const delayed = Number(tpe.delayed || 0);
+
+      if (cancellations > 0) {
+        themes.push(
+          themeItem(
+            `TPE has ${cancellations} current cancellation${cancellations === 1 ? "" : "s"} affecting monitored Tees Valley services.`,
+            "red"
+          )
+        );
+      } else if (delayed > 0) {
+        themes.push(
+          themeItem(
+            `TPE has ${delayed} currently delayed service${delayed === 1 ? "" : "s"} across the monitored route.`,
+            "amber"
+          )
+        );
+      } else if (Number(tpe.services || 0) > 0) {
+        themes.push(
+          themeItem(
+            "TPE monitored services currently show no live cancellation or delay alert.",
+            "green"
+          )
+        );
+      }
+    }
+
+    // 2. Northern theme.
+    if (nt) {
+      const cancellations = Number(nt.cancellations || 0);
+      const delayed = Number(nt.delayed || 0);
+
+      if (cancellations > 0) {
+        themes.push(
+          themeItem(
+            `Northern has ${cancellations} current cancellation${cancellations === 1 ? "" : "s"} on monitored local services.`,
+            "red"
+          )
+        );
+      } else if (delayed > 0) {
+        themes.push(
+          themeItem(
+            `Northern has ${delayed} currently delayed local service${delayed === 1 ? "" : "s"} being monitored.`,
+            "amber"
+          )
+        );
+      } else if (Number(nt.services || 0) > 0) {
+        themes.push(
+          themeItem(
+            "Northern local services are currently operating without a live RAPS disruption alert.",
+            "green"
+          )
+        );
+      }
+    }
+
+    // 3. Route-specific passenger impact. Prefer disruption, then monitoring.
+    const disrupted = route.filter(
+      (item) => item.state === "DISRUPTION"
+    );
+
+    const monitoring = route.filter(
+      (item) => item.state === "MONITORING"
+    );
+
+    if (disrupted.length) {
+      const names = disrupted.map((item) => item.name).join(", ");
+      themes.push(
+        themeItem(
+          `Current route disruption is affecting ${names}.`,
+          "red"
+        )
+      );
+    } else if (monitoring.length) {
+      const names = monitoring.map((item) => item.name).join(", ");
+      themes.push(
+        themeItem(
+          `Live route monitoring is focused on ${names}.`,
+          "amber"
+        )
+      );
+    } else if (route.length) {
+      themes.push(
+        themeItem(
+          "No monitored Tees Valley route point currently shows a RAPS disruption alert.",
+          "green"
+        )
+      );
+    }
+
+    // 4. Darlington connection theme.
+    const darlington = routeByCode.get("DAR");
+
+    if (darlington) {
+      if (darlington.state === "DISRUPTION") {
+        themes.push(
+          themeItem(
+            `Allow extra time for Darlington connections: ${darlington.statusLabel || "live disruption is affecting the station."}`,
+            "red"
+          )
+        );
+      } else if (darlington.state === "MONITORING") {
+        themes.push(
+          themeItem(
+            `Darlington connections are being monitored: ${darlington.statusLabel || "check onward connections before travel."}`,
+            "amber"
+          )
+        );
+      } else if (darlington.state === "NORMAL") {
+        themes.push(
+          themeItem(
+            "Darlington is currently showing no live RAPS connection-risk alert.",
+            "green"
+          )
+        );
+      }
+    }
+
+    // De-duplicate and keep the panel compact.
+    const uniqueThemes = [];
+    const seen = new Set();
+
+    for (const item of themes) {
+      if (!item.text || seen.has(item.text)) continue;
+      seen.add(item.text);
+      uniqueThemes.push(item);
+
+      if (uniqueThemes.length === 4) break;
+    }
+
+    if (!uniqueThemes.length) {
+      uniqueThemes.push(
+        themeItem(
+          "Current passenger-facing themes are not available from the latest snapshot.",
+          "grey"
+        )
+      );
+    }
+
+    container.innerHTML = "";
+
+    uniqueThemes.forEach((item) => {
+      const li = document.createElement("li");
+      const dot = document.createElement("span");
+
+      dot.className = `theme-severity ${item.severity}`;
+      dot.setAttribute("aria-hidden", "true");
+
+      li.appendChild(dot);
+      li.appendChild(document.createTextNode(item.text));
+
+      container.appendChild(li);
+    });
+  }
+
   function renderSnapshot(row) {
     const payload = row.payload || {};
     const summary = payload.summary || {};
@@ -802,6 +989,7 @@
     renderFeedHealth(payload);
     renderRoute(payload);
     renderOperationalCards(payload);
+    renderCurrentThemes(payload);
   }
 
   function renderError(error) {
@@ -837,6 +1025,13 @@
       "boardConnectionsPill",
       "boardCorridorPill"
     ].forEach((id) => setStatusPill(id, "grey", "Unavailable"));
+
+    const themes = byId("trsCurrentThemes");
+    if (themes) {
+      themes.innerHTML =
+        '<li><span class="theme-severity grey" aria-hidden="true"></span>' +
+        'Current passenger-facing themes are unavailable.</li>';
+    }
   }
 
   async function refresh() {
