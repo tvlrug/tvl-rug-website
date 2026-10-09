@@ -214,6 +214,37 @@
     }
   </style>
 
+
+  <style>
+    .engineering-live-list {
+      display: grid;
+      gap: .75rem;
+    }
+
+    .engineering-live-item {
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 12px;
+      padding: .9rem 1rem;
+      background: rgba(255,255,255,.025);
+    }
+
+    .engineering-live-item strong {
+      display: block;
+      margin-bottom: .2rem;
+    }
+
+    .engineering-live-meta {
+      display: block;
+      opacity: .72;
+      font-size: .85rem;
+      margin-bottom: .35rem;
+    }
+
+    .engineering-live-item p {
+      margin: 0;
+    }
+  </style>
+
 </head>
 
 <body class="command-page">
@@ -437,11 +468,11 @@
       </div>
 
       <div class="col-lg-3 col-md-6">
-        <div class="metric-card">
+        <div class="metric-card" id="engineeringLiveCard">
           <span class="metric-label">Engineering</span>
-          <h3>Planned works</h3>
-          <p>Check journey planners for planned disruption.</p>
-          <span class="status-pill grey">Advisory</span>
+          <h3 id="engineeringLiveTitle">Loading planned works</h3>
+          <p id="engineeringLiveText">Checking the planned disruption feed...</p>
+          <span id="engineeringLivePill" class="status-pill grey">Loading</span>
         </div>
       </div>
     </div>
@@ -511,11 +542,15 @@
         <section class="dashboard-panel">
           <span class="dashboard-label">Planned disruption</span>
           <h3>Engineering works watch</h3>
-          <p>
-            Major works and route closures affecting Tees Valley passengers will be highlighted here.
+          <p id="engineeringWorksSummary">
+            Loading current and upcoming planned disruption...
           </p>
 
-          <div class="notice-box">
+          <div id="engineeringWorksList" class="engineering-live-list">
+            <div class="notice-box">Checking planned engineering works...</div>
+          </div>
+
+          <div class="notice-box mt-3">
             Always check National Rail, Northern, TPE and LNER journey planners before travelling.
           </div>
         </section>
@@ -574,7 +609,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="js/rail-command-centre.js?v=9"></script>
+<script src="js/rail-command-centre.js?v=10"></script>
 
 </body>
 </html>
