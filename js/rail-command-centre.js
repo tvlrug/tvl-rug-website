@@ -11,8 +11,8 @@
     - NEVER place the secret/service_role key in browser JavaScript.
   */
 
-  const SUPABASE_URL = "https://kmslxzqfhkyzununlow.supabase.co";
-  const SUPABASE_PUBLISHABLE_KEY = "PASTE_PUBLIC_PUBLISHABLE_KEY_HERE";
+  const SUPABASE_URL = "https://lkmslxzqfhkyzununlow.supabase.co";
+  const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_nVKIKH6qMxq23CCZG15RBg_5_iNtxzf";
 
   const REFRESH_MS = 60_000;
   const HISTORY_ROWS = 180;
