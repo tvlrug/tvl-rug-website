@@ -367,29 +367,29 @@
 
     <div class="row g-4 mb-4">
       <div class="col-lg-3 col-md-6">
-        <div class="metric-card">
+        <div class="metric-card" id="northernLiveCard">
           <span class="metric-label">Northern</span>
-          <h3>Check before travel</h3>
-          <p>Saltburn – Darlington</p>
-          <span class="status-pill amber">Monitoring</span>
+          <h3 id="northernLiveTitle">Loading live status</h3>
+          <p id="northernLiveText">Saltburn – Darlington</p>
+          <span id="northernLivePill" class="status-pill grey">Loading</span>
         </div>
       </div>
 
       <div class="col-lg-3 col-md-6">
-        <div class="metric-card">
+        <div class="metric-card" id="tpeLiveCard">
           <span class="metric-label">TPE</span>
-          <h3>Long-distance watch</h3>
-          <p>Redcar / Middlesbrough – Manchester</p>
-          <span class="status-pill amber">Monitoring</span>
+          <h3 id="tpeLiveTitle">Loading live status</h3>
+          <p id="tpeLiveText">Redcar / Middlesbrough – Manchester</p>
+          <span id="tpeLivePill" class="status-pill grey">Loading</span>
         </div>
       </div>
 
       <div class="col-lg-3 col-md-6">
-        <div class="metric-card">
+        <div class="metric-card" id="connectionsLiveCard">
           <span class="metric-label">Connections</span>
-          <h3>Darlington risk</h3>
-          <p>East Coast / Bishop Auckland interchange</p>
-          <span class="status-pill red">Passenger concern</span>
+          <h3 id="connectionsLiveTitle">Loading Darlington status</h3>
+          <p id="connectionsLiveText">East Coast / Bishop Auckland interchange</p>
+          <span id="connectionsLivePill" class="status-pill grey">Loading</span>
         </div>
       </div>
 
@@ -397,7 +397,7 @@
         <div class="metric-card">
           <span class="metric-label">Engineering</span>
           <h3>Planned works</h3>
-          <p>Check before travelling</p>
+          <p>Check journey planners for planned disruption.</p>
           <span class="status-pill grey">Advisory</span>
         </div>
       </div>
@@ -417,33 +417,33 @@
             <div class="route-row">
               <div>
                 <strong>Northern local services</strong>
-                <span>Saltburn · Redcar · Middlesbrough · Darlington</span>
+                <span id="boardNorthernText">Loading current Northern service state...</span>
               </div>
-              <span class="status-pill amber">Monitor</span>
+              <span id="boardNorthernPill" class="status-pill grey">Loading</span>
             </div>
 
             <div class="route-row">
               <div>
                 <strong>TransPennine Express</strong>
-                <span>Redcar · Middlesbrough · York · Manchester</span>
+                <span id="boardTpeText">Loading current TPE service state...</span>
               </div>
-              <span class="status-pill amber">Monitor</span>
+              <span id="boardTpePill" class="status-pill grey">Loading</span>
             </div>
 
             <div class="route-row">
               <div>
-                <strong>LNER connections</strong>
-                <span>Darlington / York long-distance interchange</span>
+                <strong>Darlington connections</strong>
+                <span id="boardConnectionsText">Loading interchange status...</span>
               </div>
-              <span class="status-pill grey">Advisory</span>
+              <span id="boardConnectionsPill" class="status-pill grey">Loading</span>
             </div>
 
             <div class="route-row">
               <div>
-                <strong>Local stopping services</strong>
-                <span>Tees Valley Line stopping patterns and capacity</span>
+                <strong>Tees Valley corridor</strong>
+                <span id="boardCorridorText">Loading route intelligence...</span>
               </div>
-              <span class="status-pill green">Normal</span>
+              <span id="boardCorridorPill" class="status-pill grey">Loading</span>
             </div>
           </div>
         </section>
@@ -534,7 +534,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="js/rail-command-centre.js?v=7"></script>
+<script src="js/rail-command-centre.js?v=8"></script>
 
 </body>
 </html>
