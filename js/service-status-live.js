@@ -1,8 +1,8 @@
 (() => {
   "use strict";
 
-  const SUPABASE_URL = "https://lopkjhmahofslsyfxrxp.supabase.co";
-  const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_KBtZGWGCZxh5j34F-aaijQ_rAc0kA3K";
+  const SUPABASE_URL = "https://lkmslxzqfhkyzununlow.supabase.co";
+  const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_nVKIKH6qMxq23CCZG15RBg_5_iNtxzf";
 
   const SERVICE_ORDER = ["TVL_NT", "TPE_MANCHESTER"];
 
